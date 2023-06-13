@@ -3,11 +3,19 @@ package com.example.rinenggaapp.view.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.rinenggaapp.model.Module
+import com.example.rinenggaapp.repository.ModuleRepository
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val moduleRepository = ModuleRepository.getInstance()
+    val listModule = moduleRepository.listModuleLiveData
+
+    suspend fun getAllModule() = moduleRepository.getAllModule()
+
+
+
+
+
+
 }

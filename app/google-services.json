@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "476124065449",
+    "project_id": "rinenggaapp-c5aac",
+    "storage_bucket": "rinenggaapp-c5aac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476124065449:android:fa626e8fc99c0afede03b8",
+        "android_client_info": {
+          "package_name": "com.example.rinenggaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476124065449-pr764p1urs6gg6u0ig4mnig6ea4djtjs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rinenggaapp",
+            "certificate_hash": "11589cd5d8a5cf625833988a987975d0281d3c44"
+          }
+        },
+        {
+          "client_id": "476124065449-h89imv9173li9su9g0jjtrj5tpd5493g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHDjjQOFAmqse3TdgOiE6Ewn1s8p0wXeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476124065449-h89imv9173li9su9g0jjtrj5tpd5493g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

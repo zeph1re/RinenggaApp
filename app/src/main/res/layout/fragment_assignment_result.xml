@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".view.assignment.AssignmentResultFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/congratulation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat!!"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anda mendapatkan nilai :" />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/result_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="90"
+        android:textSize="20dp"
+        android:layout_below="@id/congratulation"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="24dp"/>
+
+    <TextView
+        android:id="@+id/assignment_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pawulang telah diselesaikan"
+        android:layout_below="@id/result_number"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/correct_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/assignment_done"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jawaban Benar : "/>
+
+        <TextView
+            android:id="@+id/correct_answer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/wrong_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/correct_answer"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jawaban Salah : "/>
+
+        <TextView
+            android:id="@+id/wrong_answer_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/not_answered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wrong_answer"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="8dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jawaban Tidak Dijawab : "
+            />
+
+        <TextView
+            android:id="@+id/not_answered_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3" />
+    </LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
