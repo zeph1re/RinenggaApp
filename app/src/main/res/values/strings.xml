@@ -8,4 +8,11 @@
     <string name="beranda">Beranda</string>
     <string name="pawulang">Pawulang</string>
     <string name="pengaturan">Pengaturan</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="nis">NIS</string>
+    <string name="belum_punya_akun">Belum punya akun?  </string>
+    <string name="sudah_punya_akun">Sudah punya akun?  </string>
 </resources>

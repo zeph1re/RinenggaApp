@@ -3,8 +3,10 @@ package com.example.rinenggaapp.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.model.Module
 import com.example.rinenggaapp.model.User
@@ -18,6 +20,7 @@ class ModuleAdapter() : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val moduleTitle: TextView = itemView.findViewById(R.id.module_title)
+        val moduleImage: ImageView = itemView.findViewById(R.id.module_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +38,12 @@ class ModuleAdapter() : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.moduleTitle.text = moduleList!![position].name
+
+        if(moduleList!![position].imageUrl != null){
+            this.let {
+                Glide.with(holder.itemView.context).load(moduleList!![position].imageUrl).into(holder.moduleImage)
+            }
+        }
     }
 
 

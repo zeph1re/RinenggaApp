@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/starterPageFragment_1">
+
+    <fragment
+        android:id="@+id/starterPageFragment_1"
+        android:name="com.example.rinenggaapp.view.starter_page.StarterPageFragment_1"
+        android:label="fragment_starter_page_1"
+        tools:layout="@layout/fragment_starter_page_1" >
+        <action
+            android:id="@+id/action_starterPageFragment_1_to_starterPageFragment_2"
+            app:destination="@id/starterPageFragment_2" />
+    </fragment>
+    <fragment
+        android:id="@+id/starterPageFragment_2"
+        android:name="com.example.rinenggaapp.view.starter_page.StarterPageFragment_2"
+        android:label="fragment_starter_page_2"
+        tools:layout="@layout/fragment_starter_page_2" >
+        <action
+            android:id="@+id/action_starterPageFragment_2_to_starterPageFragment_3"
+            app:destination="@id/starterPageFragment_3" />
+    </fragment>
+    <fragment
+        android:id="@+id/starterPageFragment_3"
+        android:name="com.example.rinenggaapp.view.starter_page.StarterPageFragment_3"
+        android:label="fragment_starter_page_3"
+        tools:layout="@layout/fragment_starter_page_3" />
+</navigation>
