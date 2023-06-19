@@ -1,9 +1,11 @@
 package com.example.rinenggaapp.repository
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.rinenggaapp.model.Module
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ModuleRepository {
@@ -27,16 +29,24 @@ class ModuleRepository {
     }
 
     fun getAllModule() {
-        db.collection("module")
-            .addSnapshotListener{ value, _ ->
+        val moduleCollection = db.collection("module")
+        moduleCollection.addSnapshotListener{ value, _ ->
                 val listModuleResult: MutableList<Module> = mutableListOf()
                 if(!value!!.isEmpty){
                     value.forEach { item ->
                         val module = item.toObject(Module::class.java)
+                        Log.d("value" , module.toString())
                         listModuleResult += module
+
                     }
                 }
                 listModule.postValue(listModuleResult)
             }
     }
+
+
+
 }
+
+
+

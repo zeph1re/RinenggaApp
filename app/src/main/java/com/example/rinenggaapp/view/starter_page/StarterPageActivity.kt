@@ -11,21 +11,17 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
+import com.example.rinenggaapp.view.auth.LoginActivity
 
 class StarterPageActivity : AppCompatActivity() {
-
-    private lateinit var prefs : SharedPreferences
-    private lateinit var skip : String
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_starter_page)
 
-        skip = ""
-        prefs = getSharedPreferences("starterPage", Context.MODE_PRIVATE)
-        Log.d("prefs", prefs.getString("skipStarterPage", skip).toString())
-        if (prefs.getString("skipStarterpage", skip).toString() == "SKIP") {
+        val prefs = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+        val skipped = prefs.getString("SKIP", "")
+        if (skipped!!.isNotEmpty()) {
             startActivity(Intent(this, MainActivity::class.java))
         }
 

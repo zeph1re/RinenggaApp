@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.model.Module
 import com.example.rinenggaapp.model.User
 
-class ModuleAdapter() : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
+class ModuleAdapter(private val onClick : (Module) -> Unit) : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
 
     private var moduleList: List<Module>? = null
     fun setListModule(list: List<Module>){
@@ -21,6 +22,7 @@ class ModuleAdapter() : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val moduleTitle: TextView = itemView.findViewById(R.id.module_title)
         val moduleImage: ImageView = itemView.findViewById(R.id.module_image)
+        val moduleCard: View = itemView.findViewById(R.id.moduleCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,6 +46,10 @@ class ModuleAdapter() : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
                 Glide.with(holder.itemView.context).load(moduleList!![position].imageUrl).into(holder.moduleImage)
             }
         }
+        holder.moduleCard.setOnClickListener{
+            onClick(moduleList!![position])
+        }
+
     }
 
 

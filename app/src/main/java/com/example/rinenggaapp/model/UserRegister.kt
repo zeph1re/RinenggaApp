@@ -4,12 +4,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Account (
+data class UserRegister (
     val name : String,
     val nis : String,
     val email : String,
     val password : String
-        ) : Parcelable
+    ) : Parcelable
 
-{
-}

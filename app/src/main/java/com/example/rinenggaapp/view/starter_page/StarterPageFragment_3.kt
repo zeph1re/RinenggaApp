@@ -13,6 +13,7 @@ import android.widget.Button
 import androidx.navigation.Navigation
 import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
+import com.example.rinenggaapp.view.auth.LoginActivity
 
 
 class StarterPageFragment_3 : Fragment() {
@@ -38,25 +39,22 @@ class StarterPageFragment_3 : Fragment() {
 
         skipButton.setOnClickListener {
             removeStarterPagefromFirstInstall()
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
 
         nextButton.setOnClickListener {
             removeStarterPagefromFirstInstall()
-            startActivity(Intent(requireActivity(),MainActivity::class.java))
+            startActivity(Intent(requireActivity(),LoginActivity::class.java))
         }
 
     }
 
     fun removeStarterPagefromFirstInstall() {
         val skipped = "SKIP"
-        val sharedPreferences = activity?.getSharedPreferences("starterPage", Context.MODE_PRIVATE)
+        val sharedPreferences = activity?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
 
-        editor?.putString("skipStarterPage", skipped)
+        editor?.putString("SKIP", skipped)
         editor?.apply()
-        Log.d("prefs", sharedPreferences?.getString("skipStarterPage",null).toString())
-
-
     }
 }

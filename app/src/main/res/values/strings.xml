@@ -15,4 +15,13 @@
     <string name="nis">NIS</string>
     <string name="belum_punya_akun">Belum punya akun?  </string>
     <string name="sudah_punya_akun">Sudah punya akun?  </string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="start">Mulai</string>
+    <string name="cancel">Batal</string>
+    <string name="ubah">Ubah</string>
+    <string name="no_hp">No. Hp</string>
+    <string name="full_name">Full Name</string>
+    <string name="ubah_akun">Ubah Akun</string>
+    <string name="imageurlprofile">ImageUrlProfile</string>
+    <string name="imageurlprofilebuttonadd">ImageUrlProfileButtonAdd</string>
 </resources>

@@ -14,8 +14,8 @@
         >
         <ImageView
             android:id="@+id/starter_page_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
             android:layout_margin="32dp"
             android:src="@drawable/rinenggaapp_logo"
             app:layout_constraintBottom_toTopOf="@id/detail_text"

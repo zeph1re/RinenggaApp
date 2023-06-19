@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/module_detail_quiz_navigation"
+    app:startDestination="@id/moduleDetailFragment">
+
+    <fragment
+        android:id="@+id/moduleDetailFragment"
+        android:name="com.example.rinenggaapp.view.home.ModuleDetailFragment"
+        android:label="fragment_module_detail"
+        tools:layout="@layout/fragment_module_detail" />
+    <fragment
+        android:id="@+id/quizDetailFragment"
+        android:name="com.example.rinenggaapp.view.quiz.QuizDetailFragment"
+        android:label="fragment_quiz_detail"
+        tools:layout="@layout/fragment_quiz_detail" />
+</navigation>

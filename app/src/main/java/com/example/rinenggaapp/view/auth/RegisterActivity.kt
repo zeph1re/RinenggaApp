@@ -5,18 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.example.rinenggaapp.MainActivity
-import com.example.rinenggaapp.R
-import com.example.rinenggaapp.databinding.ActivityLoginBinding
+import androidx.lifecycle.lifecycleScope
 import com.example.rinenggaapp.databinding.ActivityRegisterBinding
-import com.example.rinenggaapp.view.home.HomeViewModel
+import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var _binding: ActivityRegisterBinding
 
-//    private var registerViewModel : AuthViewModel by viewModels()
+    private val registerViewModel : AuthViewModel by viewModels()
+    val binding get() = _binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -33,7 +34,11 @@ class RegisterActivity : AppCompatActivity() {
 
             if (fullName.isNotEmpty() && nis.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && rePassword.isNotEmpty()) {
                 if (password == rePassword) {
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    lifecycleScope.launch {
+                        registerViewModel.registerAccount(UserRegister(fullName, nis ,email, password))
+                    }
+
+                    startActivity(Intent(this, RegisterVerificationActivity::class.java))
 
                 } else {
                     Toast.makeText(this, "Password dan Re-enter Password harus sama", Toast.LENGTH_SHORT).show()

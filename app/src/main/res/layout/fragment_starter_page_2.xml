@@ -9,10 +9,10 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/starter_page_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_margin="32dp"
-        android:src="@drawable/rinenggaapp_logo"
+        android:src="@drawable/landing_page_image_2"
         app:layout_constraintBottom_toTopOf="@id/detail_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

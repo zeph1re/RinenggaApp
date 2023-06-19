@@ -1,11 +1,13 @@
 package com.example.rinenggaapp.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Question(
-    val id : String,
-    val question: String,
-    val optionOne : String,
-    val optionTwo : String,
-    val optionThree : String,
-    val optionFour : String,
-    val correctAnswer : String
-)
+    val id : String = "",
+    val moduleTitle: String = "",
+    val questionText: String = "",
+    val answers : ArrayList<String>? = null ,
+    val correctAnswer : String = ""
+) : Parcelable

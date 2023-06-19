@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
+import com.example.rinenggaapp.view.auth.LoginActivity
 
 
 class StarterPageFragment_1 : Fragment() {
@@ -40,8 +41,14 @@ class StarterPageFragment_1 : Fragment() {
         navController = Navigation.findNavController(view)
 
         skipButton.setOnClickListener {
-            removeStarterPagefromFirstInstall()
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
+            val skipped = "SKIP"
+            val sharedPreferences = activity?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+            val editor = sharedPreferences?.edit()
+
+            editor?.putString("SKIP", skipped)
+            editor?.apply()
+
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
 
         nextButton.setOnClickListener {
@@ -49,15 +56,5 @@ class StarterPageFragment_1 : Fragment() {
         }
     }
 
-    fun removeStarterPagefromFirstInstall() {
-        val skipped = "SKIP"
-        val sharedPreferences = activity?.getSharedPreferences("starterPage", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
-
-        editor?.putString("skipStarterPage", skipped)
-        editor?.apply()
-
-
-    }
 }
 
