@@ -14,6 +14,9 @@ class ModuleRepository {
     private val listModule = MutableLiveData<List<Module>>()
     val listModuleLiveData : LiveData<List<Module>> = listModule
 
+    private val moduleData = MutableLiveData<Module>()
+    val moduleDataLiveData : LiveData<Module> = moduleData
+
 
     companion object {
         @Volatile
@@ -37,12 +40,25 @@ class ModuleRepository {
                         val module = item.toObject(Module::class.java)
                         Log.d("value" , module.toString())
                         listModuleResult += module
-
                     }
                 }
                 listModule.postValue(listModuleResult)
             }
     }
+
+    suspend fun getOneModuleData (moduleName : String) {
+        val dataModule = db.collection("module")
+        dataModule.whereEqualTo("name", moduleName)
+            .get().addOnSuccessListener {
+
+
+
+        }.addOnFailureListener {
+
+        }
+    }
+
+
 
 
 

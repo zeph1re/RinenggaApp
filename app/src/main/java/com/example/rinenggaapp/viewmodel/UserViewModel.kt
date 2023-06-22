@@ -9,9 +9,6 @@ class UserViewModel : ViewModel() {
     private val userRepository = UserRepository.getInstance()
     val currentUserProfile = userRepository.currentUserFotoProfilUrlLiveData
 
-
-    
-
     suspend fun changePassword() {
 
     }

@@ -1,60 +1,74 @@
 package com.example.rinenggaapp.view.quiz
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
+import com.example.rinenggaapp.databinding.FragmentQuizDetailBinding
+import com.example.rinenggaapp.databinding.FragmentQuizResultBinding
+import com.example.rinenggaapp.view.starter_page.StarterPageActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QuizResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class QuizResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding : FragmentQuizResultBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_result, container, false)
+        _binding = FragmentQuizResultBinding.inflate(inflater, container, false)
+        val root : View = binding.root
+
+        var quizScore = arguments?.getInt("quizScore")
+        val totalQuestion = arguments?.getInt("totalQuestion")
+
+        if (quizScore != null) {
+            quizScore = (quizScore/ totalQuestion!!) * 100
+        }
+
+        val resultValue = binding.resultNumber
+        val answeredValue = binding.correctAnswer
+        val congratulationTv = binding.congratulationTv
+
+        resultValue.text = quizScore.toString()
+        answeredValue.text = "Anda telah menyelesaikan $totalQuestion Soal Quiz"
+
+//        val userName = intent.getStringExtra(Constants.USER_NAME)
+//        val totalQuestions = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 0)
+//        val score = intent.getIntExtra(Constants.SCORE, 0)
+//
+//        congratulationTv.text = "$userName mendapatkan nilai"
+//        resultValue.text = "$score"
+//        answeredValue.text = "Your score is $score of $totalQuestions"
+//        btnRestart.setOnClickListener{
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+
+        Handler().postDelayed( { //This method will be executed once the timer is over
+            // Start your app main activity
+            val i = Intent(requireContext(), MainActivity::class.java)
+            startActivity(i)
+            // close this activity
+        }, 10000)
+
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment QuizResultFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            QuizResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
+
+
 }

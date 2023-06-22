@@ -16,6 +16,9 @@
         android:theme="@style/Theme.RinenggaApp"
         tools:targetApi="31">
         <activity
+            android:name=".view.assignment.AssignmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.home.HomeDetailActivity"
             android:exported="false" />
         <activity

@@ -37,7 +37,6 @@ class RegisterActivity : AppCompatActivity() {
                     lifecycleScope.launch {
                         registerViewModel.registerAccount(UserRegister(fullName, nis ,email, password))
                     }
-
                     startActivity(Intent(this, RegisterVerificationActivity::class.java))
 
                 } else {

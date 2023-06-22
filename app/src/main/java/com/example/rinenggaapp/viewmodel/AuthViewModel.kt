@@ -15,7 +15,6 @@ class AuthViewModel : ViewModel() {
 
     suspend fun registerAccount (account: UserRegister) = authRepository.registerUser(account)
     suspend fun loginAccount (userLogin : UserLogin) = authRepository.loginUser(userLogin)
-
     suspend fun saveOtpEmail(emailVerification : EmailVerification) = authRepository
 
     suspend fun logout() = authRepository.logout()

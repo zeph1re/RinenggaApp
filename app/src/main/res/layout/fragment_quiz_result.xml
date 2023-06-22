@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".view.quiz.QuizResultFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/congratulation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selamat!!"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/congratulationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anda mendapatkan nilai :" />
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/result_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="90"
+        android:textSize="20dp"
+        android:layout_below="@id/congratulation"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="24dp"/>
+
+    <TextView
+        android:id="@+id/assignment_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quiz telah diselesaikan"
+        android:layout_below="@id/result_number"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/correct_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Anda menjawab 1 dari 5 soal"
+        android:orientation="horizontal"
+        android:layout_below="@id/assignment_done"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="8dp"/>
+
+
+
+
+
+</RelativeLayout>

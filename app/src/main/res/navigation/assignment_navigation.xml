@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/assigment_navigation"
+    app:startDestination="@id/assignmentFragment">
+
+    <fragment
+        android:id="@+id/assignmentFragment"
+        android:name="com.example.rinenggaapp.view.assignment.AssignmentFragment"
+        android:label="fragment_assignment"
+        tools:layout="@layout/fragment_assignment" />
+    <fragment
+        android:id="@+id/assignmentResultFragment"
+        android:name="com.example.rinenggaapp.view.assignment.AssignmentResultFragment"
+        android:label="fragment_assignment_result"
+        tools:layout="@layout/fragment_assignment_result" />
+</navigation>

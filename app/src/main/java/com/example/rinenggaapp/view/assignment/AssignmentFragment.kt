@@ -42,6 +42,8 @@ class AssignmentFragment : Fragment() {
         val option3Btn = binding.optionThree
         val option4Btn = binding.optionFour
 
+        val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
+
 
 
 

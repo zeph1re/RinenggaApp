@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/assignmentDetailFragment"
-        android:name="com.example.rinenggaapp.view.assignment.AssignmentDetailFragment"
+        android:name="com.example.rinenggaapp.view.assignment.AssignmentIntroFragment"
         android:label="fragment_assignment_detail"
-        tools:layout="@layout/fragment_assignment_detail" />
+        tools:layout="@layout/fragment_assignment_intro" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.rinenggaapp.view.settings.SettingsFragment"
