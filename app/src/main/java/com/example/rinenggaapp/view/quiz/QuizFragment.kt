@@ -3,6 +3,7 @@ package com.example.rinenggaapp.view.quiz
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,8 @@ class QuizFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var progressBarText : TextView
 
+    private lateinit var assignmentTimer : ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,10 +67,14 @@ class QuizFragment : Fragment() {
         progressBar = binding.progressBar
         progressBarText = binding.tvProgress
 
+        assignmentTimer = binding.quizTimer
+
         answersTv = arrayListOf(option1, option2,option3,option4)
 
         val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
         val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
+        timerAssignment()
 
         questionViewModel.quizQuestion.observe(viewLifecycleOwner) {
             it.forEach { item ->
@@ -129,14 +136,31 @@ class QuizFragment : Fragment() {
                 }
             }
 
+
+
             Log.d("score", totalScore.toString())
         }
+    }
+
+    private fun timerAssignment() {
+        val timer = object: CountDownTimer(10000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                assignmentTimer.progress = millisUntilFinished.toInt()
+
+            }
+            override fun onFinish() {
+                Toast.makeText(requireContext(), "Next Question", Toast.LENGTH_SHORT).show()
+                updateQuestion()
+            }
+        }
+        timer.start()
     }
 
     private fun updateQuestion() {
         defaultAnswersView()
         questionText.text = questionList[currentQuestionIndex].questionText
         progressBar.progress = currentQuestionIndex + 1
+        progressBar.max = questionList.size
         progressBarText.text = "${currentQuestionIndex + 1}/${questionList.size}"
         for (answerIndex in questionList[currentQuestionIndex].answers!!.indices) {
             answersTv[answerIndex].text = questionList[currentQuestionIndex].answers!![answerIndex]
@@ -147,28 +171,31 @@ class QuizFragment : Fragment() {
     private fun defaultAnswersView() {
         for (answerTv in answersTv) {
             answerTv.typeface = Typeface.DEFAULT
-            answerTv.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary_60))
-            answerTv.setBackgroundColor(Color.LTGRAY)
+            answerTv.textSize = 17.0F
+            answerTv.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary_80))
+            answerTv.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorAccent))
         }
     }
 
     private fun selectedAnswerView(option: TextView, index: Int) {
         defaultAnswersView()
         selectedAnswerIndex = index
-        option.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_40))
         option.setTypeface(option.typeface, Typeface.BOLD)
-        option.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorAccent))
+        option.setBackgroundColor(Color.LTGRAY)
     }
 
     private fun correctAnswerView(view: Button) {
         view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorSuccess))
-        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
     }
 
     private fun incorrectAnswerView(view : Button) {
         view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorError))
-        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
+
+
 
 
 }

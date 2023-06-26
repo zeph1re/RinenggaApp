@@ -10,7 +10,6 @@ class AuthViewModel : ViewModel() {
 
     private val authRepository = AuthRepository.getInstance()
 
-    val currentUser = authRepository.currentUserLiveData
     val loginStatus = authRepository.loginStatusLiveData
 
     suspend fun registerAccount (account: UserRegister) = authRepository.registerUser(account)

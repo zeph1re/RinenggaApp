@@ -1,13 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
-    <style name="Theme.RinenggaApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.RinenggaApp" parent="Theme.MaterialComponents.Light.NoActionBar" >
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/primary_80</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorSecondary</item>
-
         <item name= "android:textViewStyle" > @style/LatoTextViewStyle </item>
         <item name= "android:buttonStyle" > @style/LatoButtonStyle </item>
     </style>

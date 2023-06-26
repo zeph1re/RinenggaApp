@@ -15,51 +15,54 @@ class QuestionRepository {
     val firebaseFirestore = FirebaseFirestore.getInstance()
 
     private val listQuestion = MutableLiveData<List<Question>>()
-    val listQuestionLiveData : LiveData<List<Question>> = listQuestion
+    val listQuestionLiveData: LiveData<List<Question>> = listQuestion
 
     private val listQuizQuestion = MutableLiveData<List<Question>>()
-    val listQuizQuestionLiveData : LiveData<List<Question>> = listQuizQuestion
-
-//    val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
+    val listQuizQuestionLiveData: LiveData<List<Question>> = listQuizQuestion
 
     fun getAllQuestion() {
         firebaseFirestore.collection("question")
-            .get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                var question : MutableList<Question> = mutableListOf()
-                question = task.result.toObjects(Question::class.java)
-                Log.d("questionData", question.toString())
-            }
-        }
-    }
-
-    fun getAllQuestionbyModuleName(moduleName : String){
-        firebaseFirestore.collection("question")
-            .whereEqualTo("moduleName", moduleName)
             .addSnapshotListener { value, error ->
-                val questionList : MutableList<Question> = mutableListOf()
-                if(!value!!.isEmpty){
+                val questionList: MutableList<Question> = mutableListOf()
+                if (!value!!.isEmpty) {
                     value.forEach { item ->
                         val question = item.toObject(Question::class.java)
-                        Log.d("value question by module name" , question.toString())
+                        Log.d("all question", question.toString())
                         questionList += question
                     }
                 }
-                listQuizQuestion.postValue(questionList)
+                listQuestion.postValue(questionList)
             }
-
     }
 
-    companion object {
-        @Volatile
-        private var instance: QuestionRepository? = null
-        fun getInstance(): QuestionRepository{
-            return instance ?: synchronized(this) {
-                if (instance == null) {
-                    instance = QuestionRepository()
+
+        fun getAllQuestionByModuleName(moduleName: String) {
+            firebaseFirestore.collection("question")
+                .whereEqualTo("moduleName", moduleName)
+                .addSnapshotListener { value, error ->
+                    val questionList: MutableList<Question> = mutableListOf()
+                    if (!value!!.isEmpty) {
+                        value.forEach { item ->
+                            val question = item.toObject(Question::class.java)
+                            Log.d("value question by module name", question.toString())
+                            questionList += question
+                        }
+                    }
+                    listQuizQuestion.postValue(questionList)
                 }
-                return instance as QuestionRepository
+
+        }
+
+        companion object {
+            @Volatile
+            private var instance: QuestionRepository? = null
+            fun getInstance(): QuestionRepository {
+                return instance ?: synchronized(this) {
+                    if (instance == null) {
+                        instance = QuestionRepository()
+                    }
+                    return instance as QuestionRepository
+                }
             }
         }
     }
-}

@@ -24,4 +24,9 @@
     <string name="ubah_akun">Ubah Akun</string>
     <string name="imageurlprofile">ImageUrlProfile</string>
     <string name="imageurlprofilebuttonadd">ImageUrlProfileButtonAdd</string>
+    <string name="sugeng_rawuh">Sugeng Rawuh</string>
+    <string name="setelah_anda_menyelesaikan_pembahasan_materi_anda_akan_diberikan_kesepatan_untuk_menguji_kompetensi_anda">Setelah anda menyelesaikan pembahasan materi anda akan diberikan kesepatan untuk menguji kompetensi anda!!</string>
+    <string name="semua_soal_disini_berupa_pilihan_ganda_nanda_akan_mendapatkan_nilai_di_akhir_sesi">Semua soal disini berupa pilihan ganda \nAnda akan mendapatkan nilai di akhir sesi</string>
+    <string name="x_ips_2">X IPS 2</string>
+    <string name="lanjut">Lanjut</string>
 </resources>

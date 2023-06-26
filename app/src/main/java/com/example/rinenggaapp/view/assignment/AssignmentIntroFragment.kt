@@ -14,9 +14,7 @@ import com.example.rinenggaapp.databinding.FragmentAssignmentIntroBinding
 class AssignmentIntroFragment : Fragment() {
 
     private var _binding: FragmentAssignmentIntroBinding? = null
-
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,9 +42,11 @@ class AssignmentIntroFragment : Fragment() {
                     .setCancelable(true)
                     .setPositiveButton("Mulai") { dialogInterface, it ->
                         val inputClass = classEditText.text.toString()
+                        val intent = Intent(requireActivity(), AssignmentActivity::class.java)
                         val bundle = Bundle()
                         bundle.putString("inputClass", inputClass)
-                        startActivity(Intent(requireActivity(), AssignmentActivity::class.java))
+                        intent.putExtra("className", inputClass)
+                        startActivity(intent)
                     }.setNegativeButton("Batal"){dialogInterface, it ->
                         dialogInterface.cancel()
                     }.show()

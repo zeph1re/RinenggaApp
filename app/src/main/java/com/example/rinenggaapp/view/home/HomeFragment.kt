@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -25,6 +26,7 @@ import com.example.rinenggaapp.model.User
 
 import com.example.rinenggaapp.view.adapter.ModuleAdapter
 import com.example.rinenggaapp.viewmodel.ModuleViewModel
+import com.example.rinenggaapp.viewmodel.UserViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 import com.google.firebase.ktx.Firebase
@@ -47,9 +49,13 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val homeViewModel =
             ViewModelProvider(this)[ModuleViewModel::class.java]
+        val userViewModel =
+            ViewModelProvider(this)[UserViewModel::class.java]
+
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
 
         val moduleRecyclerView = binding.moduleRecyclerView
         moduleAdapter = ModuleAdapter{ module ->

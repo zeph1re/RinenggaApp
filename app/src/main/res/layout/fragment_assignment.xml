@@ -7,19 +7,20 @@
     tools:context=".view.assignment.AssignmentFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ProgressBar
-        android:id="@+id/assignment_timer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:min="0"
-        android:max="4"
-        android:minHeight="10dp"
-        android:progress="1"
-        android:indeterminate="false"
-        android:progressTint="@color/primary_80"
-        android:progressBackgroundTint="@color/primary_30"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/assignment_timer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:min="0"-->
+<!--        android:max="4"-->
+<!--        android:minHeight="10dp"-->
+<!--        android:progress="1"-->
+<!--        android:indeterminate="false"-->
+<!--        android:progressTint="@color/primary_80"-->
+<!--        android:progressBackgroundTint="@color/primary_30"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        />-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,8 +61,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:min="0"
-                android:max="4"
                 android:minHeight="50dp"
                 android:progress="1"
                 android:indeterminate="false"
@@ -120,7 +119,6 @@
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
             android:text="Submit"
             android:textAllCaps="false"
             android:layout_marginTop="64dp"

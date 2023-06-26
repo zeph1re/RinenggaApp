@@ -12,7 +12,7 @@ class QuestionViewModel : ViewModel() {
     val quizQuestion = questionRepository.listQuizQuestionLiveData
 
     suspend fun getAllQuestion() = questionRepository.getAllQuestion()
-    suspend fun getQuestionbyModuleName(moduleName : String) = questionRepository.getAllQuestionbyModuleName(moduleName)
+    suspend fun getQuestionbyModuleName(moduleName : String) = questionRepository.getAllQuestionByModuleName(moduleName)
 
 //
 
