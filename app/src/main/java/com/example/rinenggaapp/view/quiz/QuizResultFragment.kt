@@ -3,6 +3,7 @@ package com.example.rinenggaapp.view.quiz
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,15 @@ import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentQuizDetailBinding
 import com.example.rinenggaapp.databinding.FragmentQuizResultBinding
 import com.example.rinenggaapp.view.starter_page.StarterPageActivity
+import kotlin.math.roundToInt
 
 
 class QuizResultFragment : Fragment() {
 
     private var _binding : FragmentQuizResultBinding? = null
     private val binding get() = _binding!!
+
+    private var totalScore : Int = 0
 
 
     override fun onCreateView(
@@ -28,18 +32,26 @@ class QuizResultFragment : Fragment() {
         _binding = FragmentQuizResultBinding.inflate(inflater, container, false)
         val root : View = binding.root
 
-        var quizScore = arguments?.getInt("quizScore")
+        val quizScore = arguments?.getInt("quizScore")
         val totalQuestion = arguments?.getInt("totalQuestion")
 
+        Log.d("quizScore", quizScore.toString())
+        Log.d("totalQuestion", totalQuestion.toString())
+
         if (quizScore != null) {
-            quizScore = (quizScore/ totalQuestion!!) * 100
+            totalScore = ((quizScore.toFloat()/ totalQuestion!!.toFloat()) * 100).roundToInt()
+            Log.d("totalScoreResult", totalScore.toString())
         }
+
+
+
+
 
         val resultValue = binding.resultNumber
         val answeredValue = binding.correctAnswer
         val congratulationTv = binding.congratulationTv
 
-        resultValue.text = quizScore.toString()
+        resultValue.text = totalScore.toString()
         answeredValue.text = "Anda telah menyelesaikan $totalQuestion Soal Quiz"
 
 //        val userName = intent.getStringExtra(Constants.USER_NAME)

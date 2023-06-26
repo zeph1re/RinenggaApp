@@ -1,6 +1,5 @@
 package com.example.rinenggaapp.view.quiz
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,16 +14,12 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentQuizBinding
-import com.example.rinenggaapp.model.Module
 import com.example.rinenggaapp.model.Question
 import com.example.rinenggaapp.viewmodel.QuestionViewModel
 import com.example.rinenggaapp.viewmodel.UserViewModel
-import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 
 class QuizFragment : Fragment() {
@@ -50,7 +45,7 @@ class QuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -74,8 +69,6 @@ class QuizFragment : Fragment() {
         val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
         val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        val moduleName = arguments?.getString("moduleName")
-
         questionViewModel.quizQuestion.observe(viewLifecycleOwner) {
             it.forEach { item ->
                 questionList.add(item)
@@ -91,18 +84,22 @@ class QuizFragment : Fragment() {
                         Toast.makeText(requireContext(), "Please, select an alternative", Toast.LENGTH_SHORT).show()
                     } else {
                         val currentQuestion = questionList[currentQuestionIndex]
-                        if (
-                            selectedAnswerIndex == currentQuestion.correctAnswerIndex
-                        ) {
-                            answerView(answersTv!![selectedAnswerIndex], R.color.colorSuccess)
+                        if ( selectedAnswerIndex == currentQuestion.correctAnswerIndex ) {
+                            correctAnswerView(answersTv[selectedAnswerIndex])
                             totalScore++
+                            Log.d("correctAnswer",
+                                currentQuestion.correctAnswerIndex.toString()
+                            )
+                            Log.d("totalScore",
+                                totalScore.toString()
+                            )
                         } else {
-                            answerView(answersTv!![selectedAnswerIndex], R.color.colorError)
-                            answerView(answersTv!![currentQuestion.correctAnswerIndex], R.color.colorSuccess)
+                            incorrectAnswerView(answersTv[selectedAnswerIndex])
+                            correctAnswerView(answersTv[currentQuestion.correctAnswerIndex])
                         }
 
                         isAnswerChecked = true
-                        submitButton?.text = if (currentQuestionIndex == questionList.size - 1) "FINISH" else "GO TO NEXT QUESTION"
+                        submitButton.text = if (currentQuestionIndex == questionList.size-1) "FINISH" else "GO TO NEXT QUESTION"
                         selectedAnswerIndex = -1
                     }
                 } else {
@@ -125,55 +122,56 @@ class QuizFragment : Fragment() {
                     it[optionIndex].let {
                         it.setOnClickListener{
                             if (!isAnswerChecked) {
-                                selectedAlternativeView(it as TextView, optionIndex)
+                                selectedAnswerView(it as Button, optionIndex)
                             }
                         }
                     }
                 }
             }
+
+            Log.d("score", totalScore.toString())
         }
     }
 
-
-
     private fun updateQuestion() {
-
-    // Render Question Text
-    questionText?.text = questionList[currentQuestionIndex].questionText
-    // Render Question Image
-        progressBar?.progress = currentQuestionIndex + 1
-    // Text of progress bar
-    progressBarText?.text = "${currentQuestionIndex + 1}/${questionList.size}"
-
-    for (answerIndex in questionList[currentQuestionIndex].answers!!.indices) {
-        answersTv!![answerIndex].text = questionList[currentQuestionIndex].answers!![answerIndex]
+        defaultAnswersView()
+        questionText.text = questionList[currentQuestionIndex].questionText
+        progressBar.progress = currentQuestionIndex + 1
+        progressBarText.text = "${currentQuestionIndex + 1}/${questionList.size}"
+        for (answerIndex in questionList[currentQuestionIndex].answers!!.indices) {
+            answersTv[answerIndex].text = questionList[currentQuestionIndex].answers!![answerIndex]
+        }
+        submitButton.text = if (currentQuestionIndex == questionList.size ) "FINISH" else "SUBMIT"
     }
 
-    submitButton?.text = if (currentQuestionIndex == questionList.size - 1) "FINISH" else "SUBMIT"
-}
+    private fun defaultAnswersView() {
+        for (answerTv in answersTv) {
+            answerTv.typeface = Typeface.DEFAULT
+            answerTv.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary_60))
+            answerTv.setBackgroundColor(Color.LTGRAY)
+        }
+    }
 
-    @SuppressLint("ResourceAsColor")
-    private fun selectedAlternativeView(option: TextView, index: Int) {
+    private fun selectedAnswerView(option: TextView, index: Int) {
+        defaultAnswersView()
         selectedAnswerIndex = index
-
-        option.setTextColor(R.color.colorAccent)
+        option.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_40))
         option.setTypeface(option.typeface, Typeface.BOLD)
-        option.background = ContextCompat.getDrawable(
-            requireContext(),
-            R.color.primary_40
-        )
-
+        option.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorAccent))
     }
 
-    @SuppressLint("ResourceAsColor")
-    private fun answerView(view: TextView, drawableId: Int) {
-        view.background = ContextCompat.getDrawable(
-            requireContext(),
-            drawableId
-        )
-        answersTv!![selectedAnswerIndex].setTextColor(R.color.colorSuccess)
-
+    private fun correctAnswerView(view: Button) {
+        view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorSuccess))
+        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
+
+    private fun incorrectAnswerView(view : Button) {
+        view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorError))
+        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+    }
+
+
 }
+
 
 

@@ -1,112 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
-    android:gravity="center"
     android:background="@color/secondary_10"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.assignment.AssignmentFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/assignment_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Pawulang"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/question"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="32dp"
-        android:text="question"
-        android:layout_marginHorizontal="64dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/option_one"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assignment_title"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <Button
-        android:id="@+id/option_one"
+    <ProgressBar
+        android:id="@+id/assignment_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:text="option 1"
-        app:layout_constraintBottom_toTopOf="@id/option_two"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        android:min="0"
+        android:max="4"
+        android:minHeight="10dp"
+        android:progress="1"
+        android:indeterminate="false"
+        android:progressTint="@color/primary_80"
+        android:progressBackgroundTint="@color/primary_30"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        />
 
-    <Button
-        android:id="@+id/option_two"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:text="option 2"
-        android:layout_marginVertical="10dp"
-        app:layout_constraintBottom_toTopOf="@id/option_three"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/option_one" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="16dp">
 
-    <Button
-        android:id="@+id/option_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:text="option 3"
-        app:layout_constraintBottom_toTopOf="@id/option_four"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/option_two" />
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_close_24"
+            android:layout_gravity="end"
+            android:layout_margin="32dp"/>
 
-    <Button
-        android:id="@+id/option_four"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:text="option 4"
-        android:layout_marginVertical="10dp"
-        app:layout_constraintBottom_toTopOf="@id/option_five"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/option_three" />
-
-    <Button
-        android:id="@+id/option_five"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_background"
-        android:elevation="5dp"
-        android:text="option 5"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toTopOf="@id/quiz_start_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/option_four" />
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            tools:text="What does country this flag belongs to?"
+            android:textSize="25sp"
+            android:paddingHorizontal="20dp"
+            android:textColor="#333333"
+            android:layout_marginBottom="30dp"
+            />
 
 
-    <Button
-        android:id="@+id/quiz_start_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:background="@drawable/rounded_rectangle"
-        android:text="Lanjut"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option_five" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginHorizontal="16dp"
+            android:gravity="center_vertical">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:min="0"
+                android:max="4"
+                android:minHeight="50dp"
+                android:progress="1"
+                android:indeterminate="false"
+                android:layout_marginEnd="16dp"
+                android:progressTint="@color/primary_80"
+                android:progressBackgroundTint="@color/primary_30"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/4"
+                />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/optionOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="option 1"
+            android:layout_marginVertical="10dp"
+            />
+
+        <Button
+            android:id="@+id/optionTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="option 2"
+            android:layout_marginVertical="10dp"
+            />
+
+        <Button
+            android:id="@+id/optionThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="option 3"
+            android:layout_marginVertical="10dp"
+            />
+
+        <Button
+            android:id="@+id/optionFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="option 4"
+            android:layout_marginVertical="10dp"
+            />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:layout_marginTop="64dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="32dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.rinenggaapp.databinding.ActivityRegisterBinding
 import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.viewmodel.AuthViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -34,9 +35,10 @@ class RegisterActivity : AppCompatActivity() {
 
             if (fullName.isNotEmpty() && nis.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && rePassword.isNotEmpty()) {
                 if (password == rePassword) {
-                    lifecycleScope.launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         registerViewModel.registerAccount(UserRegister(fullName, nis ,email, password))
                     }
+                    Toast.makeText(this, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, RegisterVerificationActivity::class.java))
 
                 } else {

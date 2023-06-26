@@ -10,4 +10,5 @@ class ModuleViewModel : ViewModel(){
     val moduleData = moduleRepository.moduleDataLiveData
 
     suspend fun getAllModule() = moduleRepository.getAllModule()
+    suspend fun getModuleByName(moduleName : String) = moduleRepository.getOneModuleData(moduleName)
 }

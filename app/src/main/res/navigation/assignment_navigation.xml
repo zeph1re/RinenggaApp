@@ -9,10 +9,23 @@
         android:id="@+id/assignmentFragment"
         android:name="com.example.rinenggaapp.view.assignment.AssignmentFragment"
         android:label="fragment_assignment"
-        tools:layout="@layout/fragment_assignment" />
+        tools:layout="@layout/fragment_assignment" >
+        <action
+            android:id="@+id/action_assignmentFragment_to_assignmentResultFragment"
+            app:destination="@id/assignmentResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/assignmentResultFragment"
         android:name="com.example.rinenggaapp.view.assignment.AssignmentResultFragment"
         android:label="fragment_assignment_result"
         tools:layout="@layout/fragment_assignment_result" />
+    <fragment
+        android:id="@+id/assignmentDetailFragment2"
+        android:name="com.example.rinenggaapp.view.assignment.AssignmentDetailFragment"
+        android:label="fragment_assignment_detail"
+        tools:layout="@layout/fragment_assignment_detail" >
+        <action
+            android:id="@+id/action_assignmentDetailFragment2_to_assignmentFragment"
+            app:destination="@id/assignmentFragment" />
+    </fragment>
 </navigation>

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.rinenggaapp.model.Module
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ModuleRepository {
@@ -14,8 +13,8 @@ class ModuleRepository {
     private val listModule = MutableLiveData<List<Module>>()
     val listModuleLiveData : LiveData<List<Module>> = listModule
 
-    private val moduleData = MutableLiveData<Module>()
-    val moduleDataLiveData : LiveData<Module> = moduleData
+    private val moduleData = MutableLiveData<List<Module>>()
+    val moduleDataLiveData : LiveData<List<Module>> = moduleData
 
 
     companion object {
@@ -31,14 +30,13 @@ class ModuleRepository {
         }
     }
 
-    fun getAllModule() {
+    suspend fun getAllModule() {
         val moduleCollection = db.collection("module")
         moduleCollection.addSnapshotListener{ value, _ ->
                 val listModuleResult: MutableList<Module> = mutableListOf()
                 if(!value!!.isEmpty){
                     value.forEach { item ->
                         val module = item.toObject(Module::class.java)
-                        Log.d("value" , module.toString())
                         listModuleResult += module
                     }
                 }
@@ -49,19 +47,18 @@ class ModuleRepository {
     suspend fun getOneModuleData (moduleName : String) {
         val dataModule = db.collection("module")
         dataModule.whereEqualTo("name", moduleName)
-            .get().addOnSuccessListener {
-
-
-
-        }.addOnFailureListener {
-
+            .addSnapshotListener{ value, _ ->
+            val moduleDataResult: MutableList<Module> = mutableListOf()
+            if(!value!!.isEmpty){
+                value.forEach { item ->
+                    val module = item.toObject(Module::class.java)
+                    Log.d("module", module.toString())
+                    moduleDataResult += module
+                }
+            }
+            moduleData.postValue(moduleDataResult)
         }
     }
-
-
-
-
-
 }
 
 
