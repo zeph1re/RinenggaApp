@@ -33,32 +33,37 @@ class AuthRepository {
     private val loginStatus = MutableLiveData<String>()
     val loginStatusLiveData: LiveData<String> = loginStatus
 
+    private val registerStatus = MutableLiveData<String>()
+    val registerStatusLiveData: LiveData<String> = registerStatus
+
+
+
     suspend fun loginUser(userLogin : UserLogin) {
         firebaseAuth.signInWithEmailAndPassword(
             userLogin.email, userLogin.password
         ).addOnCompleteListener { task ->
             if(task.isSuccessful) {
                 currentUser.value = firebaseAuth.currentUser
-                firestore.collection("user")
-                    .document(currentUser.value!!.uid)
-                    .get()
-                    .addOnSuccessListener { dataUser ->
-                        val user = dataUser.toObject(User::class.java)
-                        currentUserProfile.value = user
-                        loginStatus.postValue("OK")
-
-                    }
-
+                if (currentUser.value!!.isEmailVerified) {
+                    firestore.collection("user")
+                        .document(currentUser.value!!.uid)
+                        .get()
+                        .addOnSuccessListener { dataUser ->
+                            val user = dataUser.toObject(User::class.java)
+                            currentUserProfile.value = user
+                            loginStatus.postValue("OK")
+                        }
+                } else {
+                    loginStatus.postValue("REGISTERED")
+                }
             } else {
-                Log.w(TAG, "signInWithCustomToken:failure", task.exception)
-
+                loginStatus.postValue("FAILED")
             }
         }
 
     }
 
-    suspend fun registerUser(userRegister : UserRegister) : MutableLiveData<String> {
-        val resultMessage = MutableLiveData<String>()
+    suspend fun registerUser(userRegister : UserRegister) {
         firebaseAuth.createUserWithEmailAndPassword(userRegister.email, userRegister.password)
             .addOnCompleteListener {task ->
                 if (task.isSuccessful) {
@@ -77,27 +82,32 @@ class AuthRepository {
                                 null,
                                 null,
                                 null,
-                                null,
                                 null
                             )
+                            firestore.collection("user")
+
+
                             firestore.collection("user")
                                 .document(dataUser.id.toString())
                                 .set(dataUser)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful){
                                         currentUser.postValue(firebaseAuth.currentUser)
-                                        resultMessage.postValue("FAILED")
+                                        registerStatus.postValue("OK")
                                     }
                                 }
+
+
+
+                            user.sendEmailVerification()
                         } else {
-                            resultMessage.postValue("FAILED")
+                            registerStatus.postValue("FAILED")
                         }
                     }
                 } else {
-                    resultMessage.postValue("FAILED")
+                    registerStatus.postValue("FAILED")
                 }
             }
-        return resultMessage
     }
 
     suspend fun logout() {

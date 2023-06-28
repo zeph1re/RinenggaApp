@@ -1,6 +1,8 @@
 package com.example.rinenggaapp
 
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.rinenggaapp.databinding.ActivityMainBinding
@@ -39,6 +41,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+
+        var isBackPressedOnce = false
+
+        if(isBackPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
+        isBackPressedOnce = true
+
+        Handler().postDelayed({
+            isBackPressedOnce = false
+        }, 3000)
+
+
 
     }
 

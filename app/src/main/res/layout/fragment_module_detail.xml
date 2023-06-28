@@ -8,14 +8,12 @@
     android:gravity="center"
     tools:context=".view.home.ModuleDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/moduleTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ini judul"
-        android:textSize="20sp"
+        android:text="@string/title"
+        android:textSize="25sp"
         android:gravity="center_horizontal"
         android:layout_margin="32dp"/>
 
@@ -38,7 +36,8 @@
                 android:id="@+id/moduleDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:text="@string/lorem_ipsum"
+                android:textSize="18sp"
                 android:layout_margin="16dp"/>
 
 
@@ -46,23 +45,21 @@
                 android:id="@+id/moduleExample1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="example"
+                android:text="@string/example"
+                android:textSize="18sp"
                 android:layout_marginBottom="32dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_below="@id/moduleDescription"/>
+                android:layout_marginHorizontal="16dp" />
 
         </LinearLayout>
-
-
-
     </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/finish_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
         android:layout_below="@id/detail_layout"
-        android:text="Finish"
+        android:text="@string/selesai"
+        android:textSize="18sp"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_button"/>

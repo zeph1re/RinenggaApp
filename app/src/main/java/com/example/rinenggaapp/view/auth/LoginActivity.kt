@@ -71,11 +71,15 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginViewModel.loginStatus.observe(this) {
-                if (it == "OK") {
-                    Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    Toast.makeText(this, "Email belum Terdaftar", Toast.LENGTH_SHORT).show()
+                when (it) {
+                    "OK" -> {
+                        Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+                    "REGISTERED" -> Toast.makeText(this, "Email sudah terdaftar dan belum divirifikasi", Toast.LENGTH_SHORT).show()
+                    else -> {
+                        Toast.makeText(this, "Email belum Terdaftar", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

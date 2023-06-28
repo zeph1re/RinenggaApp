@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="16dp"
     tools:context=".view.assignment.AssignmentDetailFragment">
 
     <TextView
         android:id="@+id/detailFragmentTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="128dp"
         android:text="@string/pawulang"
         android:textColor="@color/primary_80"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/peraturan1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. Pilih jawaban yang menurut anda paling benar"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/detailFragmentTitle"
+         />
+
+    <TextView
+        android:id="@+id/peraturan2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2. Pilihan jawaban hanya 4 alternatif jawaban"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/peraturan1"/>
+
+    <TextView
+        android:id="@+id/peraturan3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3. Jawaban yang benar akan langsung ditampilkan "
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/peraturan2"
+        />
+
+    <TextView
+        android:id="@+id/peraturan4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4. Hanya ada jawaban benar, dan diakhir ujian akan ditampilkan nilai"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/peraturan3"
+        />
 
     <TextView
         android:id="@+id/totalQuestionText"
@@ -25,36 +66,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Total Questions :"
-        android:textSize="16sp"
+        android:text="@string/total_questions"
+        android:textSize="18sp"
         android:textColor="@color/primary_80"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailFragmentTitle" />
-
+        android:layout_below="@id/peraturan4"
+        />
 
     <TextView
         android:id="@+id/totalQuestionDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:text="NA"
+        android:layout_marginStart="64dp"
+        android:text="@string/na"
+        android:textSize="18sp"
         android:textColor="@color/primary_80"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/totalQuestionText" />
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/peraturan4"
+        android:layout_toEndOf="@id/totalQuestionText"
+
+        />
 
     <Button
         android:id="@+id/startAssignmentButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/rounded_button"
-        android:text="Start Assignment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/start_assignment"
+        android:layout_alignParentBottom="true"
+        />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
