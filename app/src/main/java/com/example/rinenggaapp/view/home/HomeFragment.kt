@@ -25,6 +25,7 @@ import com.example.rinenggaapp.model.Module
 import com.example.rinenggaapp.model.User
 
 import com.example.rinenggaapp.view.adapter.ModuleAdapter
+import com.example.rinenggaapp.viewmodel.AuthViewModel
 import com.example.rinenggaapp.viewmodel.ModuleViewModel
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -49,12 +50,22 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val homeViewModel =
             ViewModelProvider(this)[ModuleViewModel::class.java]
-        val userViewModel =
-            ViewModelProvider(this)[UserViewModel::class.java]
-
+        val authViewModel =
+            ViewModelProvider(this)[AuthViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val welcomeText = binding.welcomeText
+
+        lifecycleScope.launch(Dispatchers.IO){
+            homeViewModel.getAllModule()
+        }
+
+        authViewModel.currentUserProfile.observe(viewLifecycleOwner) {
+            welcomeText.text = "Sugeng Rawuh!! \n ${it!!.name}"
+            Log.d("fullName", it.toString())
+        }
 
 
         val moduleRecyclerView = binding.moduleRecyclerView
@@ -70,9 +81,7 @@ class HomeFragment : Fragment() {
         moduleRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         moduleRecyclerView.adapter = moduleAdapter
 
-        lifecycleScope.launch(Dispatchers.IO){
-            homeViewModel.getAllModule()
-        }
+
 
         homeViewModel.listModule.observe(viewLifecycleOwner){
             moduleAdapter.setListModule(it)

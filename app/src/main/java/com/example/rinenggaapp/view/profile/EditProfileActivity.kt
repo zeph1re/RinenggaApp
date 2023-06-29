@@ -25,6 +25,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             if (fullName.isNotEmpty() && nis.isNotEmpty() && email.isNotEmpty() && phoneNumber.isNotEmpty()){
+
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 Toast.makeText(this, "Harap isi dengan lengkap!!", Toast.LENGTH_SHORT).show()

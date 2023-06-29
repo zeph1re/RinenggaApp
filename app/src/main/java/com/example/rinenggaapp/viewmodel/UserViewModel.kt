@@ -7,18 +7,12 @@ import com.example.rinenggaapp.repository.UserRepository
 class UserViewModel : ViewModel() {
 
     private val userRepository = UserRepository.getInstance()
-    val currentUserProfile = userRepository.currentUserFotoProfilUrlLiveData
-//    val currentUser = userRepository.currentUser
+    val currentUserProfile = userRepository.currentUserProfileLiveData
+    val userSpecific = userRepository.getSpesificUserByIdLiveData
 
-    suspend fun getCurrentUser() {
+    suspend fun getCurrentUser(userId : String) = userRepository.getSpecificUserById(userId)
 
-    }
+    suspend fun changePassword(password : String)  = userRepository.changePassword(password)
 
-    suspend fun changePassword() {
-
-    }
-
-    suspend fun editProfile(user : User) {
-
-    }
+    suspend fun editProfile(user : User) = userRepository.editProfile(user)
 }

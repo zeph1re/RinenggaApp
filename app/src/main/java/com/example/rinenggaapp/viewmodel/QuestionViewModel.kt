@@ -14,7 +14,6 @@ class QuestionViewModel : ViewModel() {
     suspend fun getAllQuestion() = questionRepository.getAllQuestion()
     suspend fun getQuestionbyModuleName(moduleName : String) = questionRepository.getAllQuestionByModuleName(moduleName)
 
-//
 
 
 

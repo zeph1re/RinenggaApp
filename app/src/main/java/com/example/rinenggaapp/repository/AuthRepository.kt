@@ -1,12 +1,11 @@
 package com.example.rinenggaapp.repository
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.model.User
 import com.example.rinenggaapp.model.UserLogin
+import com.example.rinenggaapp.model.UserRegister
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -64,54 +63,62 @@ class AuthRepository {
     }
 
     suspend fun registerUser(userRegister : UserRegister) {
-        firebaseAuth.createUserWithEmailAndPassword(userRegister.email, userRegister.password)
-            .addOnCompleteListener {task ->
-                if (task.isSuccessful) {
-                    val user = firebaseAuth.currentUser
-                    Log.d("Current User", user.toString())
-                    val updateDisplayNameUser = userProfileChangeRequest {
-                        displayName = userRegister.name
-                    }
-                    user!!.updateProfile(updateDisplayNameUser)
-                        .addOnCompleteListener {task ->
-                        if (task.isSuccessful) {
-                            val dataUser = User(
-                                id = user.uid,
-                                name = user.displayName!!,
-                                email = user.email!!,
-                                null,
-                                null,
-                                null,
-                                null
-                            )
-                            firestore.collection("user")
-
-
-                            firestore.collection("user")
-                                .document(dataUser.id.toString())
-                                .set(dataUser)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful){
-                                        currentUser.postValue(firebaseAuth.currentUser)
-                                        registerStatus.postValue("OK")
-                                    }
-                                }
-
-
-
-                            user.sendEmailVerification()
-                        } else {
-                            registerStatus.postValue("FAILED")
+            firebaseAuth.createUserWithEmailAndPassword(userRegister.email, userRegister.password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = firebaseAuth.currentUser
+                        val updateDisplayNameUser = userProfileChangeRequest {
+                            displayName = userRegister.name
                         }
+                        user!!.updateProfile(updateDisplayNameUser)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val dataUser = User(
+                                        id = user.uid,
+                                        name = user.displayName!!,
+                                        email = user.email!!,
+                                        nis = userRegister.nis,
+                                        imageUrl = null,
+                                        no_hp = null,
+                                        assignmentResult = null
+                                    )
+                                    firestore.collection("user")
+                                        .document(dataUser.id.toString())
+                                        .set(dataUser)
+                                        .addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                currentUser.postValue(firebaseAuth.currentUser)
+                                                registerStatus.postValue("OK")
+                                            }
+                                        }
+                                    user.sendEmailVerification()
+                                } else {
+                                    registerStatus.postValue("FAILED")
+                                }
+                            }
+                    } else {
+                        registerStatus.postValue("FAILED")
                     }
-                } else {
-                    registerStatus.postValue("FAILED")
-                }
-            }
+
+        }
     }
 
     suspend fun logout() {
         firebaseAuth.signOut()
+    }
+
+    suspend fun checkEmailAlreadyRegister(email : String) {
+        firebaseAuth.fetchSignInMethodsForEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val check = !task.result.signInMethods.isNullOrEmpty()
+                    if(!check) {
+                        checkIfEmailRegister.postValue("OK")
+                    } else {
+                        checkIfEmailRegister.postValue("ALREADY REGISTERED")
+                    }
+                }
+            }
     }
 
 

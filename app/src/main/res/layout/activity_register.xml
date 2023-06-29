@@ -1,133 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="32dp"
-    android:gravity="center"
     tools:context=".view.auth.RegisterActivity">
 
-    <TextView
-        android:id="@+id/registerTitle"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:textSize="24sp"
-        android:fontFamily="@font/lato_regular"
-        android:gravity="center_horizontal"
-        android:layout_marginVertical="20dp"
-        />
-
-    <LinearLayout
-        android:id="@+id/no_account_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/registerTitle"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="20dp">
+        android:layout_gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/registerTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sudah_punya_akun"
-            android:textSize="20sp"
+            android:text="@string/register"
+            android:textSize="24sp"
+            android:fontFamily="@font/lato_regular"
+            android:gravity="center_horizontal"
+            android:layout_marginVertical="20dp"
             />
 
-        <TextView
-            android:id="@+id/login_nav"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/no_account_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:layout_below="@id/registerTitle"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sudah_punya_akun"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/login_nav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"
+                />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/full_name_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/fullName"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_background"
+            android:layout_below="@id/no_account_layout"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:autofillHints="Your Full Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/nis_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/nis"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_background"
+            android:layout_below="@id/full_name_input_register"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:autofillHints="12345"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/email_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/email"
+            android:textSize="16sp"
+            android:background="@drawable/edit_text_background"
+            android:layout_below="@id/nis_input_register"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:autofillHints="abcd@gmail.com"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/password_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/password"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_background"
+            android:layout_below="@id/email_input_register"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:autofillHints="12345678"
+            android:inputType="textPassword"
             />
 
+        <EditText
+            android:id="@+id/re_password_input_register"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/password_confirm"
+            android:textSize="17sp"
+            android:background="@drawable/edit_text_background"
+            android:layout_below="@id/password_input_register"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="10dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:autofillHints="12345678"
+            android:inputType="textPassword" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/register"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button"
+            android:layout_below="@id/re_password_input_register"
+            android:layout_marginVertical="32dp"
+            android:layout_marginHorizontal="16dp"/>
 
-    <EditText
-        android:id="@+id/full_name_input_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/fullName"
-        android:textSize="17sp"
-        android:background="@drawable/edit_text_background"
-        android:layout_below="@id/no_account_layout"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
-        />
 
-    <EditText
-        android:id="@+id/nis_input_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/nis"
-        android:textSize="17sp"
-        android:background="@drawable/edit_text_background"
-        android:layout_below="@id/full_name_input_register"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
-        />
+    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/email_input_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/email"
-        android:textSize="16sp"
-        android:background="@drawable/edit_text_background"
-        android:layout_below="@id/nis_input_register"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
-        />
 
-    <EditText
-        android:id="@+id/password_input_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/password"
-        android:textSize="17sp"
-        android:background="@drawable/edit_text_background"
-        android:layout_below="@id/email_input_register"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
-        />
 
-    <EditText
-        android:id="@+id/re_password_input_register"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/password_confirm"
-        android:textSize="17sp"
-        android:background="@drawable/edit_text_background"
-        android:layout_below="@id/password_input_register"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="10dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="8dp"
-        />
-
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/register"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:background="@drawable/rounded_button"
-        android:layout_below="@id/re_password_input_register"
-        android:layout_marginVertical="32dp"
-        android:layout_marginHorizontal="16dp"/>
-
-</RelativeLayout>
+</ScrollView>

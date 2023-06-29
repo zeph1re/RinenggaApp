@@ -1,19 +1,16 @@
 package com.example.rinenggaapp.view.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.databinding.ActivityRegisterBinding
 import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.viewmodel.AuthViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -52,15 +49,37 @@ class RegisterActivity : AppCompatActivity() {
 
             if (checkAllFields()) {
                 lifecycleScope.launch {
+                    registerViewModel.checkEmailAlreadyRegistered(email)
                     registerViewModel.registerAccount(UserRegister(fullName,nis,email, password))
                 }
 
-                registerViewModel.registerStatus.observe(this) {
-                    if (it == "OK") {
-                        Toast.makeText(this, "Register Berhasil, silahkan cek email verifikasi anda", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, LoginActivity::class.java))
-                    } else {
-                        Toast.makeText(this, "Email belum Terdaftar", Toast.LENGTH_SHORT).show()
+                registerViewModel.checkEmailRegistered.observe(this) { checkEmailStatus ->
+                    when (checkEmailStatus) {
+                        "OK" -> {
+                            registerViewModel.registerStatus.observe(this) { registerStatus ->
+                                when (registerStatus) {
+                                    "OK" -> {
+                                        Toast.makeText(
+                                            this,
+                                            "Register Berhasil, silahkan cek email verifikasi anda" +
+                                                    "",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        startActivity(Intent(this, LoginActivity::class.java))
+                                    }
+                                    "FAILED" -> {
+                                        Toast.makeText(this, "Register Gagal", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                }
+                            }
+                        }
+                        "ALREADY REGISTERED" -> {
+                                Toast.makeText(
+                                    this,
+                                    "Email sudah terdaftar",
+                                    Toast.LENGTH_SHORT).show()
+                            }
                     }
                 }
             }
