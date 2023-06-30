@@ -16,8 +16,12 @@ class AssignmentActivity : AppCompatActivity() {
     }
 
     fun getClassName () : String {
-        val className = intent.getBundleExtra("inputClass")
+        val className = intent.getBundleExtra("className")
         return className.toString()
+    }
+
+    override fun onBackPressed() {
+
     }
 
 }

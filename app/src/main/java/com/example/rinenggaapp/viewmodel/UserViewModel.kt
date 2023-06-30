@@ -1,18 +1,39 @@
 package com.example.rinenggaapp.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
-import com.example.rinenggaapp.model.User
+import com.example.rinenggaapp.model.UserLogin
+import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.repository.UserRepository
+import java.io.File
 
 class UserViewModel : ViewModel() {
 
     private val userRepository = UserRepository.getInstance()
+
+//    User
+    val currentUser = userRepository.currentUserLiveData
+    val updateAssignmentScore = userRepository.updateAssignmentScoreStatusLiveData
+    val changePasswordStatus = userRepository.updatePasswordStatusLiveData
+    val updateProfileStatus = userRepository.updateProfileStatusLiveData
+
+
+//    Auth
+    val loginStatus = userRepository.loginStatusLiveData
+    val registerStatus = userRepository.registerStatusLiveData
+    val checkEmailRegistered = userRepository.checkIfEmailRegisterLiveData
     val currentUserProfile = userRepository.currentUserProfileLiveData
-    val userSpecific = userRepository.getSpesificUserByIdLiveData
 
-    suspend fun getCurrentUser(userId : String) = userRepository.getSpecificUserById(userId)
+    suspend fun registerAccount (account: UserRegister) = userRepository.registerUser(account)
+    suspend fun checkEmailAlreadyRegistered (email : String) = userRepository.checkEmailAlreadyRegister(email)
+    suspend fun loginAccount (userLogin : UserLogin) = userRepository.loginUser(userLogin)
+    suspend fun logout() = userRepository.logout()
+    suspend fun changePassword(oldPassword : String, newPassword: String)  = userRepository.changePassword(oldPassword, newPassword)
+    suspend fun editProfile(fullName : String, nis : String, email : String, phoneNumber : String) = userRepository.editProfile(fullName,nis,email,phoneNumber)
+    suspend fun putAssignmentScore(assignmentScore : Int) = userRepository.putAssignmentScore(assignmentScore)
 
-    suspend fun changePassword(password : String)  = userRepository.changePassword(password)
-
-    suspend fun editProfile(user : User) = userRepository.editProfile(user)
+    suspend fun updateProfilePhoto(uri : Uri, file : File)
+        = userRepository.getUserProfilePhotoUrl(
+            uri, false, file.toString()
+    )
 }

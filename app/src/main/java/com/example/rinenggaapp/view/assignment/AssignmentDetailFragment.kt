@@ -32,7 +32,7 @@ class AssignmentDetailFragment : Fragment() {
         val root : View = binding.root
 
         val className = (activity as AssignmentActivity).getClassName()
-        Log.d("className" , className.toString())
+        Log.d("className" , className)
 
         val totalQuestion = binding.totalQuestionDetail
         val startAssignmentButton = binding.startAssignmentButton

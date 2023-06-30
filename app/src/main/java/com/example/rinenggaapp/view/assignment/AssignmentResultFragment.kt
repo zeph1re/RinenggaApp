@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentAssignmentResultBinding
 import com.example.rinenggaapp.databinding.FragmentQuizResultBinding
 import com.example.rinenggaapp.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 class AssignmentResultFragment : Fragment() {
@@ -40,18 +42,27 @@ class AssignmentResultFragment : Fragment() {
         val textResult = binding.resultNumber
         val questionAnswered = binding.questionAnswered
 
+
+
         if (assignmentScore != null) {
             totalScore = ((assignmentScore.toFloat()/ totalQuestion!!.toFloat()) * 100).roundToInt()
             Log.d("totalScoreResult", totalScore.toString())
         }
 
+        lifecycleScope.launch {
+            userViewModel.putAssignmentScore(totalScore)
+        }
+
         textResult.text = totalScore.toString()
         questionAnswered.text = "Anda telah mengerjakan $totalQuestion"
 
-        Handler().postDelayed({
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
-        }, 3000)
-
+        userViewModel.updateAssignmentScore.observe(viewLifecycleOwner) {
+           if (it == "OK") {
+                    Handler().postDelayed({
+                        startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    }, 3000)
+            }
+        }
         return root
     }
 

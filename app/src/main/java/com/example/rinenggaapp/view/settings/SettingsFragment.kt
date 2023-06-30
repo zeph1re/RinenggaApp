@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentSettingsBinding
 import com.example.rinenggaapp.view.auth.LoginActivity
 import com.example.rinenggaapp.view.profile.ChangePasswordActivity
 import com.example.rinenggaapp.view.profile.EditProfileActivity
-import com.example.rinenggaapp.viewmodel.AuthViewModel
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +37,7 @@ class SettingsFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val settingViewModel =
-            ViewModelProvider(this)[AuthViewModel::class.java]
+            ViewModelProvider(this)[UserViewModel::class.java]
 
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -48,10 +49,6 @@ class SettingsFragment : Fragment() {
 
         sharedPreferences = requireActivity().getSharedPreferences("PREFS", Context.MODE_PRIVATE)
 
-        lifecycleScope.launch {
-
-        }
-
         settingViewModel.currentUserProfile.observe(viewLifecycleOwner){
             Log.d("profileName", it.toString())
             if (it != null) {
@@ -59,10 +56,6 @@ class SettingsFragment : Fragment() {
                 nis.text = it.nis
                 Glide.with(requireContext()).load(it.imageUrl).into(profilePhoto)
             }
-
-
-
-
         }
 
         binding.editProfile.setOnClickListener {

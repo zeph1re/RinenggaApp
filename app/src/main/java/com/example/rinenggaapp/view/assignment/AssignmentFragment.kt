@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.rinenggaapp.R
@@ -46,13 +47,6 @@ class AssignmentFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var progressBarText : TextView
     private lateinit var assignmentTimer : ProgressBar
-
-
-    private var correctAnswer = 0
-    private var notAnswer = 0
-    private var wrongAnswer = 0
-
-    private var totalQuestion by Delegates.notNull<Long>()
 
 
     override fun onCreateView(

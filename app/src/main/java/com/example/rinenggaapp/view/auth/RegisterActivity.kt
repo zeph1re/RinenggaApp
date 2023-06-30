@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.rinenggaapp.databinding.ActivityRegisterBinding
 import com.example.rinenggaapp.model.UserRegister
-import com.example.rinenggaapp.viewmodel.AuthViewModel
+import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val registerViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        val registerViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         fullNameInput = binding.fullNameInputRegister
         nisInput = binding.nisInputRegister
@@ -108,6 +108,11 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
 
+        if (passwordInput.text.toString().trim().length < 8) {
+            passwordInput.error = "Password must be 8 or more character"
+            return false
+        }
+
         if (passwordInput.text.toString() != confirmPasswordInput.text.toString()) {
             confirmPasswordInput.error = "Password do not match"
             return false
@@ -117,6 +122,13 @@ class RegisterActivity : AppCompatActivity() {
             confirmPasswordInput.error = "This is required field"
             return false
         }
+
+        if (confirmPasswordInput.text.toString().trim().length < 8) {
+            confirmPasswordInput.error = "Password must be 8 or more character"
+            return false
+        }
+
+
         return true
     }
 }

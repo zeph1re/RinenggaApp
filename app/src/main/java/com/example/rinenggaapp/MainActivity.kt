@@ -1,14 +1,19 @@
 package com.example.rinenggaapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.rinenggaapp.databinding.ActivityMainBinding
 import com.example.rinenggaapp.view.assignment.AssignmentIntroFragment
+import com.example.rinenggaapp.view.auth.LoginActivity
 import com.example.rinenggaapp.view.home.HomeFragment
 import com.example.rinenggaapp.view.settings.SettingsFragment
+import com.example.rinenggaapp.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +24,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(HomeFragment())
+
+        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
+        userViewModel.currentUserProfile.observe(this) {
+            if (it!!.id != null) {
+                Log.d("currentUser", it.toString())
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+        }
 
 
         binding.navView.setOnItemSelectedListener {

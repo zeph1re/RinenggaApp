@@ -19,11 +19,11 @@ class StarterPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_starter_page)
 
-        val prefs = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
-        val skipped = prefs.getString("SKIP", "")
-        if (skipped!!.isNotEmpty()) {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+//        val prefs = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+//        val skipped = prefs.getString("SKIP", "")
+//        if (skipped!!.isNotEmpty()) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }
 
     }
 }
