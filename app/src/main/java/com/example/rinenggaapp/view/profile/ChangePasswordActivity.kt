@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.rinenggaapp.MainActivity
-import com.example.rinenggaapp.R
+import com.example.rinenggaapp.view.MainActivity
 import com.example.rinenggaapp.databinding.ActivityChangePasswordBinding
-import com.example.rinenggaapp.databinding.ActivityEditProfileBinding
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 

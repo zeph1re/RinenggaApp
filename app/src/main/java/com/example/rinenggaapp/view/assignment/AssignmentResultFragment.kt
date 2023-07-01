@@ -10,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.rinenggaapp.MainActivity
-import com.example.rinenggaapp.R
+import com.example.rinenggaapp.view.MainActivity
 import com.example.rinenggaapp.databinding.FragmentAssignmentResultBinding
-import com.example.rinenggaapp.databinding.FragmentQuizResultBinding
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -29,7 +27,7 @@ class AssignmentResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAssignmentResultBinding.inflate(inflater, container, false)
         val root : View = binding.root

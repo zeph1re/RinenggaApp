@@ -1,13 +1,18 @@
 package com.example.rinenggaapp.view.assignment
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.rinenggaapp.databinding.ActivityAssignmentBinding
+import com.example.rinenggaapp.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 
 class AssignmentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAssignmentBinding
+
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,8 +25,16 @@ class AssignmentActivity : AppCompatActivity() {
         return className.toString()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        lifecycleScope.launch {
+            userViewModel.putAssignmentScore(0)
+        }
     }
 
 }

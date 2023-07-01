@@ -9,11 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.view.auth.LoginActivity
 
@@ -22,7 +19,6 @@ class StarterPageFragment_1 : Fragment() {
 
     private lateinit var skipButton: Button
     private lateinit var nextButton: Button
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -45,7 +41,7 @@ class StarterPageFragment_1 : Fragment() {
             val sharedPreferences = activity?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
             val editor = sharedPreferences?.edit()
 
-            editor?.putString("SKIP", skipped)
+            editor?.putString("SKIP_KEY", skipped)
             editor?.apply()
 
             startActivity(Intent(requireActivity(), LoginActivity::class.java))

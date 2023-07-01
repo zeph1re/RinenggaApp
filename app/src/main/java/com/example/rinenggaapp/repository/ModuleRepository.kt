@@ -30,7 +30,7 @@ class ModuleRepository {
         }
     }
 
-    suspend fun getAllModule() {
+    fun getAllModule() {
         val moduleCollection = db.collection("module")
         moduleCollection.addSnapshotListener{ value, _ ->
                 val listModuleResult: MutableList<Module> = mutableListOf()
@@ -44,7 +44,7 @@ class ModuleRepository {
             }
     }
 
-    suspend fun getOneModuleData (moduleName : String) {
+    fun getOneModuleData (moduleName : String) {
         val dataModule = db.collection("module")
         dataModule.whereEqualTo("name", moduleName)
             .addSnapshotListener{ value, _ ->

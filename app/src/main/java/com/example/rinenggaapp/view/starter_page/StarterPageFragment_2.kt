@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.view.auth.LoginActivity
 
@@ -44,7 +41,7 @@ class StarterPageFragment_2 : Fragment() {
             val sharedPreferences = activity?.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
             val editor = sharedPreferences?.edit()
 
-            editor?.putString("SKIP", skipped)
+            editor?.putString("SKIP_KEY", skipped)
             editor?.apply()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }

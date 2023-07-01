@@ -1,7 +1,6 @@
 package com.example.rinenggaapp.view.assignment
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentAssignmentDetailBinding
-import com.example.rinenggaapp.view.home.HomeDetailActivity
 import com.example.rinenggaapp.viewmodel.QuestionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

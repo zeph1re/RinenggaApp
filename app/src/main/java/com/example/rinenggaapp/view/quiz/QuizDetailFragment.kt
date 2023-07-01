@@ -7,18 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentQuizDetailBinding
-import com.example.rinenggaapp.model.Question
 import com.example.rinenggaapp.viewmodel.QuestionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.toString
 
 class QuizDetailFragment : Fragment() {
 

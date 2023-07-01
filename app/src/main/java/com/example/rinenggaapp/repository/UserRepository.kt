@@ -50,6 +50,7 @@ class UserRepository {
     val updateAssignmentScoreStatusLiveData : LiveData<String> = updateAssignmentScoreStatus
 
 
+
     suspend fun loginUser(userLogin : UserLogin) {
         firebaseAuth.signInWithEmailAndPassword(
             userLogin.email, userLogin.password
@@ -235,7 +236,6 @@ class UserRepository {
         }
 
     }
-
 
     companion object {
         @Volatile

@@ -9,7 +9,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.rinenggaapp.MainActivity
+import com.example.rinenggaapp.view.MainActivity
 import com.example.rinenggaapp.databinding.ActivityEditProfileBinding
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
@@ -72,7 +72,6 @@ class EditProfileActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     userViewModel.editProfile(fullName, nis, email, phoneNumber)
                     userViewModel.checkEmailAlreadyRegistered(email)
-//
                 }
                 userViewModel.checkEmailRegistered.observe(this) {
                     when (it) {
@@ -101,7 +100,4 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-    fun checkField() {
-
-    }
 }

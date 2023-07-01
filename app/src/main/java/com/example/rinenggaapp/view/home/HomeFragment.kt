@@ -1,5 +1,6 @@
 package com.example.rinenggaapp.view.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rinenggaapp.databinding.FragmentHomeBinding
-
 import com.example.rinenggaapp.view.adapter.ModuleAdapter
 import com.example.rinenggaapp.viewmodel.ModuleViewModel
 import com.example.rinenggaapp.viewmodel.UserViewModel
-import com.google.firebase.firestore.auth.User
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -29,10 +27,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var moduleAdapter : ModuleAdapter
 
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val homeViewModel =
             ViewModelProvider(this)[ModuleViewModel::class.java]
@@ -49,7 +48,7 @@ class HomeFragment : Fragment() {
         }
 
         authViewModel.currentUserProfile.observe(viewLifecycleOwner) {
-            welcomeText.text = "Sugeng Rawuh!! \n ${it!!.name}"
+            welcomeText.text = "Sugeng Rawuh!!\n${it!!.name}"
             Log.d("fullName", it.toString())
         }
 
@@ -66,8 +65,6 @@ class HomeFragment : Fragment() {
 
         moduleRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         moduleRecyclerView.adapter = moduleAdapter
-
-
 
         homeViewModel.listModule.observe(viewLifecycleOwner){
             moduleAdapter.setListModule(it)

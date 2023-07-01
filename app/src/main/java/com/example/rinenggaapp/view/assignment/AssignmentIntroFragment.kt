@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.rinenggaapp.databinding.FragmentAssignmentIntroBinding
+import com.example.rinenggaapp.viewmodel.UserViewModel
 
 
 class AssignmentIntroFragment : Fragment() {
@@ -29,30 +31,38 @@ class AssignmentIntroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
         val classEditText = binding.inputClass
         val nextButton = binding.nextButton
 
-        val alertDialog = AlertDialog.Builder(requireContext())
+        userViewModel.currentUserProfile.observe(viewLifecycleOwner){
+            if (it!!.assignmentResult != null ) {
+                nextButton.isEnabled = false
+                Toast.makeText(requireContext(), "Anda sudah melakukan Pawulang!! \n tidak dapat mengulang lagi", Toast.LENGTH_SHORT).show()
+            } else {
+                val alertDialog = AlertDialog.Builder(requireContext())
 
-        nextButton.setOnClickListener {
-            if (classEditText.text.toString().isNotEmpty()) {
-                alertDialog.setTitle("Mulai Ujian")
-                    .setMessage("Jika sudah siap, silahkan klik tombol mulai ")
-                    .setCancelable(true)
-                    .setPositiveButton("Mulai") { dialogInterface, it ->
-                        val inputClass = classEditText.text.toString()
-                        val intent = Intent(requireActivity(), AssignmentActivity::class.java)
-                        val bundle = Bundle()
-                        bundle.putString("inputClass", inputClass)
-                        intent.putExtra("className", inputClass)
-                        startActivity(intent)
-                    }.setNegativeButton("Batal"){dialogInterface, it ->
-                        dialogInterface.cancel()
-                    }.show()
-            } else{
-                Toast.makeText(requireActivity(), "Silahkan isi kelas Anda", Toast.LENGTH_SHORT).show()
+                nextButton.setOnClickListener {
+                    if (classEditText.text.toString().isNotEmpty()) {
+                        alertDialog.setTitle("Mulai Ujian")
+                            .setMessage("Jika sudah siap, silahkan klik tombol mulai ")
+                            .setCancelable(true)
+                            .setPositiveButton("Ya") { _, _ ->
+                                val inputClass = classEditText.text.toString()
+                                val intent = Intent(requireActivity(), AssignmentActivity::class.java)
+                                val bundle = Bundle()
+                                bundle.putString("inputClass", inputClass)
+                                intent.putExtra("className", inputClass)
+                                startActivity(intent)
+                            }.setNegativeButton("Batal"){ dialogInterface, _ ->
+                                dialogInterface.cancel()
+                            }.show()
+                    } else{
+                        Toast.makeText(requireActivity(), "Silahkan isi kelas Anda", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-
         }
     }
 

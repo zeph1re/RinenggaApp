@@ -3,8 +3,8 @@ package com.example.rinenggaapp.view.assignment
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +13,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentAssignmentBinding
 import com.example.rinenggaapp.model.Question
 import com.example.rinenggaapp.viewmodel.QuestionViewModel
-import com.example.rinenggaapp.viewmodel.UserViewModel
-import java.util.Timer
-import java.util.TimerTask
-import kotlin.properties.Delegates
 
 
 class AssignmentFragment : Fragment() {
@@ -55,8 +51,7 @@ class AssignmentFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentAssignmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
 
     }
 
@@ -72,15 +67,15 @@ class AssignmentFragment : Fragment() {
         progressBar = binding.progressBar
         progressBarText = binding.tvProgress
 
-//       assignmentTimer = binding.assignmentTimer
+       assignmentTimer = binding.timer
 
         answersTv = arrayListOf(option1, option2,option3,option4)
 
         val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
-        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        questionViewModel.allQuestion.observe(viewLifecycleOwner) {
-            it.forEach { item ->
+
+        questionViewModel.allQuestion.observe(viewLifecycleOwner) { listQuestion ->
+            listQuestion.forEach { item ->
                 questionList.add(item)
             }
             Log.d("quizQuestion", questionList.toString())
@@ -127,10 +122,10 @@ class AssignmentFragment : Fragment() {
                 }
             }
 
-            answersTv.let {
-                for (optionIndex in it.indices) {
-                    it[optionIndex].let {
-                        it.setOnClickListener{
+            answersTv.let { listButton ->
+                for (optionIndex in listButton.indices) {
+                    listButton[optionIndex].let { button ->
+                        button.setOnClickListener{
                             if (!isAnswerChecked) {
                                 selectedAnswerView(it as Button, optionIndex)
                             }
@@ -139,28 +134,26 @@ class AssignmentFragment : Fragment() {
                 }
             }
 
-//            timerAssignment()
+            timerAssignment()
 
             Log.d("score", totalScore.toString())
         }
     }
 
-//    private fun timerAssignment() {
-//        var count = 0
-//        val timer = Timer()
-//
-//        timer.schedule(object : TimerTask() {
-//            override fun run() {
-//                count++
-//                assignmentTimer.progress = count
-//                if (count > 100) {
-//                    timer.cancel()
-//                    updateQuestion()
-//                }
-//            }
-//        }, 0,100
-//        )
-//    }
+    private fun timerAssignment() {
+        object : CountDownTimer(10000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                assignmentTimer.progress = (millisUntilFinished/1000).toInt()
+            }
+
+            override fun onFinish() {
+                currentQuestionIndex++
+                updateQuestion()
+            }
+        }.start()
+
+    }
 
     private fun updateQuestion() {
         defaultAnswersView()
@@ -193,12 +186,12 @@ class AssignmentFragment : Fragment() {
 
     private fun correctAnswerView(view: Button) {
         view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorSuccess))
-        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        answersTv[selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
 
     private fun incorrectAnswerView(view : Button) {
         view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorError))
-        answersTv!![selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        answersTv[selectedAnswerIndex].setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
 
 }

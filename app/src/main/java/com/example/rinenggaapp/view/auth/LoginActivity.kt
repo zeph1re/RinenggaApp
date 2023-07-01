@@ -1,18 +1,16 @@
 package com.example.rinenggaapp.view.auth
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.rinenggaapp.MainActivity
 import com.example.rinenggaapp.databinding.ActivityLoginBinding
 import com.example.rinenggaapp.model.UserLogin
+import com.example.rinenggaapp.view.MainActivity
 import com.example.rinenggaapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
@@ -31,22 +29,10 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val sharedPreferences = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
-//        val emailPrefs = sharedPreferences.getString("EMAIL", "")
-//        val passwordPrefs = sharedPreferences.getString("PASSWORD", "")
-//
-
-//        if (emailPrefs!!.isNotEmpty() && passwordPrefs!!.isNotEmpty()){
-//            startActivity(Intent(this, MainActivity::class.java))
-//        }
-
-
         val loginButton = binding.loginButton
         val registerNav = binding.registerNav
         emailInput = binding.emailInputLogin
         passwordInput = binding.passwordInputLogin
-
-
 
         registerNav.setOnClickListener {
             val i = Intent(this, RegisterActivity::class.java)
@@ -56,11 +42,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
            if (checkFields()){
                processLogin()
-
-//               val editor = sharedPreferences.edit()
-//               editor.putString("EMAIL", binding.emailInputLogin.text.toString())
-//               editor.putString("PASSWORD", binding.passwordInputLogin.text.toString())
-//               editor.apply()
            }
 
 
@@ -71,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.emailInputLogin.text.toString()
         val password = binding.passwordInputLogin.text.toString()
         
-        if (email.isNullOrEmpty() && password.isNullOrEmpty()){
+        if (email.isEmpty() && password.isEmpty()){
             Toast.makeText(this, "Email dan Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
         } else {
             lifecycleScope.launch {
@@ -121,7 +102,9 @@ class LoginActivity : AppCompatActivity() {
         return true
     }
 
+
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-//        Nothing to do
+        finishAffinity()
     }
 }

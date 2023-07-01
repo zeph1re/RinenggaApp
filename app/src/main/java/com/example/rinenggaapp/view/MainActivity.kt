@@ -1,4 +1,4 @@
-package com.example.rinenggaapp
+package com.example.rinenggaapp.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.ActivityMainBinding
 import com.example.rinenggaapp.view.assignment.AssignmentIntroFragment
 import com.example.rinenggaapp.view.auth.LoginActivity
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         if(isBackPressedOnce) {
             super.onBackPressed()
-            return
+            finishAffinity()
         }
 
         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()

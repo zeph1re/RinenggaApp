@@ -41,10 +41,8 @@ class ModuleAdapter(private val onClick : (Module) -> Unit) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.moduleTitle.text = moduleList!![position].name
 
-        if(moduleList!![position].imageUrl != null){
-            this.let {
-                Glide.with(holder.itemView.context).load(moduleList!![position].imageUrl).into(holder.moduleImage)
-            }
+        this.let {
+            Glide.with(holder.itemView.context).load(moduleList!![position].imageUrl).into(holder.moduleImage)
         }
         holder.moduleCard.setOnClickListener{
             onClick(moduleList!![position])

@@ -1,5 +1,6 @@
 package com.example.rinenggaapp.view.quiz
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -20,7 +21,6 @@ import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentQuizBinding
 import com.example.rinenggaapp.model.Question
 import com.example.rinenggaapp.viewmodel.QuestionViewModel
-import com.example.rinenggaapp.viewmodel.UserViewModel
 
 
 class QuizFragment : Fragment() {
@@ -51,8 +51,7 @@ class QuizFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,15 +71,14 @@ class QuizFragment : Fragment() {
         answersTv = arrayListOf(option1, option2,option3,option4)
 
         val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
-        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         timerAssignment()
 
-        questionViewModel.quizQuestion.observe(viewLifecycleOwner) {
-            it.forEach { item ->
-                questionList.add(item)
+        questionViewModel.quizQuestion.observe(viewLifecycleOwner) { questionList ->
+            questionList.forEach { item ->
+                this.questionList.add(item)
             }
-            Log.d("quizQuestion", questionList.toString())
+            Log.d("quizQuestion", this.questionList.toString())
 
             updateQuestion()
 
@@ -90,7 +88,7 @@ class QuizFragment : Fragment() {
                     if (!anyAnswerIsChecked) {
                         Toast.makeText(requireContext(), "Please, select an alternative", Toast.LENGTH_SHORT).show()
                     } else {
-                        val currentQuestion = questionList[currentQuestionIndex]
+                        val currentQuestion = this.questionList[currentQuestionIndex]
                         if ( selectedAnswerIndex == currentQuestion.correctAnswerIndex ) {
                             correctAnswerView(answersTv[selectedAnswerIndex])
                             totalScore++
@@ -106,17 +104,17 @@ class QuizFragment : Fragment() {
                         }
 
                         isAnswerChecked = true
-                        submitButton.text = if (currentQuestionIndex == questionList.size-1) "FINISH" else "GO TO NEXT QUESTION"
+                        submitButton.text = if (currentQuestionIndex == this.questionList.size-1) "FINISH" else "GO TO NEXT QUESTION"
                         selectedAnswerIndex = -1
                     }
                 } else {
-                    if (currentQuestionIndex < questionList.size - 1) {
+                    if (currentQuestionIndex < this.questionList.size - 1) {
                         currentQuestionIndex++
                         updateQuestion()
                     } else {
                         val bundle = Bundle()
                         bundle.putInt("quizScore", totalScore)
-                        bundle.putInt("totalQuestion", questionList.size)
+                        bundle.putInt("totalQuestion", this.questionList.size)
                         Navigation.findNavController(requireView()).navigate(R.id.action_quizFragment_to_quizResultFragment, bundle)
                     }
 
@@ -124,10 +122,10 @@ class QuizFragment : Fragment() {
                 }
             }
 
-            answersTv?.let {
-                for (optionIndex in it.indices) {
-                    it[optionIndex].let {
-                        it.setOnClickListener{
+            answersTv.let { buttonList ->
+                for (optionIndex in buttonList.indices) {
+                    buttonList[optionIndex].let { button ->
+                        button.setOnClickListener{
                             if (!isAnswerChecked) {
                                 selectedAnswerView(it as Button, optionIndex)
                             }
@@ -156,6 +154,7 @@ class QuizFragment : Fragment() {
         timer.start()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateQuestion() {
         defaultAnswersView()
         questionText.text = questionList[currentQuestionIndex].questionText

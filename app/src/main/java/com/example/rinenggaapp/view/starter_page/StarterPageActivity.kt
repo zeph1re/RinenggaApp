@@ -2,28 +2,27 @@ package com.example.rinenggaapp.view.starter_page
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.rinenggaapp.MainActivity
-import com.example.rinenggaapp.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.rinenggaapp.databinding.ActivityStarterPageBinding
 import com.example.rinenggaapp.view.auth.LoginActivity
 
 class StarterPageActivity : AppCompatActivity() {
 
+    private lateinit var binding : ActivityStarterPageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_starter_page)
+        binding = ActivityStarterPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        val prefs = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
-//        val skipped = prefs.getString("SKIP", "")
-//        if (skipped!!.isNotEmpty()) {
-//            startActivity(Intent(this, MainActivity::class.java))
-//        }
-
+        val prefs = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+        val skipped = prefs.getString("SKIP_KEY", null)
+        if (skipped == "SKIP") {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
+
+
+
 }
