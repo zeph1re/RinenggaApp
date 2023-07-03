@@ -18,7 +18,6 @@ import kotlin.math.roundToInt
 
 class AssignmentResultFragment : Fragment() {
 
-
     private var _binding : FragmentAssignmentResultBinding? = null
     private val binding get() = _binding!!
 
@@ -40,25 +39,27 @@ class AssignmentResultFragment : Fragment() {
         val textResult = binding.resultNumber
         val questionAnswered = binding.questionAnswered
 
-
+        val classInfo = (activity as AssignmentActivity).getClassName()
+        Log.d("classInfo Result", classInfo)
 
         if (assignmentScore != null) {
             totalScore = ((assignmentScore.toFloat()/ totalQuestion!!.toFloat()) * 100).roundToInt()
             Log.d("totalScoreResult", totalScore.toString())
         }
 
-        lifecycleScope.launch {
-            userViewModel.putAssignmentScore(totalScore)
-        }
-
         textResult.text = totalScore.toString()
         questionAnswered.text = "Anda telah mengerjakan $totalQuestion"
+
+
+        lifecycleScope.launch {
+            userViewModel.putAssignmentData(totalScore, classInfo)
+        }
 
         userViewModel.updateAssignmentScore.observe(viewLifecycleOwner) {
            if (it == "OK") {
                     Handler().postDelayed({
-                        startActivity(Intent(requireActivity(), MainActivity::class.java))
-                    }, 3000)
+                        startActivity(Intent(activity as AssignmentActivity, MainActivity::class.java))
+                    }, 4000)
             }
         }
         return root

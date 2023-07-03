@@ -212,14 +212,15 @@ class UserRepository {
         }
     }
 
-    suspend fun putAssignmentScore(assignmentScore : Int) {
+    suspend fun putAssignmentData(assignmentScore : Int, classInfo : String) {
         val user = firebaseAuth.currentUser
         if (user != null) {
             firestore.collection("user")
                 .document(user.uid)
                 .update(
                     mapOf(
-                        "assignmentScore" to assignmentScore
+                        "assignmentResult" to assignmentScore,
+                        "classInfo" to classInfo
                     )
                 ).addOnSuccessListener {
                     firestore.collection("user")
@@ -234,7 +235,6 @@ class UserRepository {
                     updateAssignmentScoreStatus.postValue("FAILED")
                 }
         }
-
     }
 
     companion object {

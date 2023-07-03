@@ -27,7 +27,6 @@ class QuestionRepository {
                 if (!value!!.isEmpty) {
                     value.forEach { item ->
                         val question = item.toObject(Question::class.java)
-                        Log.d("all question", question.toString())
                         questionList += question
                     }
                 }

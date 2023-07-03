@@ -13,5 +13,5 @@ data class User(
     val classInfo : String? = "",
     val imageUrl: String? = "",
     val no_hp: String? = "",
-    val assignmentResult: String? = ""
+    val assignmentResult: Int? = 0
 ): Parcelable

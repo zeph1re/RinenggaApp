@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         binding.navView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> replaceFragment(HomeFragment())
@@ -56,23 +55,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-
-        var isBackPressedOnce = false
-
-        if(isBackPressedOnce) {
-            super.onBackPressed()
-            finishAffinity()
-        }
-
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show()
-        isBackPressedOnce = true
-
-        Handler().postDelayed({
-            isBackPressedOnce = false
-        }, 3000)
-
-
 
     }
 

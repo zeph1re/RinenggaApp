@@ -3,14 +3,20 @@ package com.example.rinenggaapp.view.assignment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.FragmentAssignmentIntroBinding
 import com.example.rinenggaapp.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 
 
 class AssignmentIntroFragment : Fragment() {
@@ -33,8 +39,23 @@ class AssignmentIntroFragment : Fragment() {
 
         val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        val classEditText = binding.inputClass
+        val classDropDown = binding.inputClassDropdown
         val nextButton = binding.nextButton
+
+        val classes = arrayOf("X1", "X3","X4","X5","X6","X7","X8","X9","X10" )
+        var classInfo = ""
+
+        val classAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, classes)
+        classDropDown.adapter = classAdapter
+        classDropDown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                classInfo = classes[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(requireContext(), "Silahkan pilih kelas", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){
             if (it!!.assignmentResult != null ) {
@@ -44,16 +65,13 @@ class AssignmentIntroFragment : Fragment() {
                 val alertDialog = AlertDialog.Builder(requireContext())
 
                 nextButton.setOnClickListener {
-                    if (classEditText.text.toString().isNotEmpty()) {
+                    if (classInfo.isNotEmpty()) {
                         alertDialog.setTitle("Mulai Ujian")
-                            .setMessage("Jika sudah siap, silahkan klik tombol mulai ")
+                            .setMessage("Cek kembali kelas anda, Pawulang hanya dapat digunakan sekali!!\n\nHarap hati-hati!!\n\nJika anda keluar dari aplikasi saat ujian berlangsung maka nilai anda langsung 0")
                             .setCancelable(true)
                             .setPositiveButton("Ya") { _, _ ->
-                                val inputClass = classEditText.text.toString()
                                 val intent = Intent(requireActivity(), AssignmentActivity::class.java)
-                                val bundle = Bundle()
-                                bundle.putString("inputClass", inputClass)
-                                intent.putExtra("className", inputClass)
+                                intent.putExtra("classInfo", classInfo)
                                 startActivity(intent)
                             }.setNegativeButton("Batal"){ dialogInterface, _ ->
                                 dialogInterface.cancel()
@@ -65,8 +83,4 @@ class AssignmentIntroFragment : Fragment() {
             }
         }
     }
-
-
-
-
 }

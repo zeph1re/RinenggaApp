@@ -21,20 +21,13 @@ class AssignmentActivity : AppCompatActivity() {
     }
 
     fun getClassName () : String {
-        val className = intent.getBundleExtra("className")
+        val className = intent.getStringExtra("classInfo")
         return className.toString()
     }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
 
-    }
-
-    override fun onPause() {
-        super.onPause()
-        lifecycleScope.launch {
-            userViewModel.putAssignmentScore(0)
-        }
     }
 
 }

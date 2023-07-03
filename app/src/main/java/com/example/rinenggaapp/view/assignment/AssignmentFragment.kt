@@ -90,17 +90,7 @@ class AssignmentFragment : Fragment() {
                     } else {
                         val currentQuestion = questionList[currentQuestionIndex]
                         if ( selectedAnswerIndex == currentQuestion.correctAnswerIndex ) {
-                            correctAnswerView(answersTv[selectedAnswerIndex])
                             totalScore++
-                            Log.d("correctAnswer",
-                                currentQuestion.correctAnswerIndex.toString()
-                            )
-                            Log.d("totalScore",
-                                totalScore.toString()
-                            )
-                        } else {
-                            incorrectAnswerView(answersTv[selectedAnswerIndex])
-                            correctAnswerView(answersTv[currentQuestion.correctAnswerIndex])
                         }
 
                         isAnswerChecked = true
