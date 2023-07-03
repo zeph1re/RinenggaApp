@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class ModuleRepository {
 
-    var db = FirebaseFirestore.getInstance()
+    private var db = FirebaseFirestore.getInstance()
     private val listModule = MutableLiveData<List<Module>>()
     val listModuleLiveData : LiveData<List<Module>> = listModule
 

@@ -1,18 +1,14 @@
 package com.example.rinenggaapp.repository
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.rinenggaapp.model.Module
 import com.example.rinenggaapp.model.Question
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QuerySnapshot
 
 class QuestionRepository {
 
-    val firebaseFirestore = FirebaseFirestore.getInstance()
+    private val firebaseFirestore = FirebaseFirestore.getInstance()
 
     private val listQuestion = MutableLiveData<List<Question>>()
     val listQuestionLiveData: LiveData<List<Question>> = listQuestion
@@ -22,7 +18,7 @@ class QuestionRepository {
 
     fun getAllQuestion() {
         firebaseFirestore.collection("question")
-            .addSnapshotListener { value, error ->
+            .addSnapshotListener { value, _ ->
                 val questionList: MutableList<Question> = mutableListOf()
                 if (!value!!.isEmpty) {
                     value.forEach { item ->
@@ -38,12 +34,11 @@ class QuestionRepository {
         fun getAllQuestionByModuleName(moduleName: String) {
             firebaseFirestore.collection("question")
                 .whereEqualTo("moduleName", moduleName)
-                .addSnapshotListener { value, error ->
+                .addSnapshotListener { value, _ ->
                     val questionList: MutableList<Question> = mutableListOf()
                     if (!value!!.isEmpty) {
                         value.forEach { item ->
                             val question = item.toObject(Question::class.java)
-                            Log.d("value question by module name", question.toString())
                             questionList += question
                         }
                     }
