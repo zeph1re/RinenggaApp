@@ -156,7 +156,10 @@ class UserRepository {
 
     suspend fun editProfile(fullName : String, nis: String, email : String, phoneNumber: String){
         val user = firebaseAuth.currentUser
-        if (user != null) {
+        if (user != null){
+            if (user.email == email) {
+                checkEmailAlreadyRegister(email)
+            }
             firestore.collection("user").document(user.uid)
                 .update(
                     mapOf(

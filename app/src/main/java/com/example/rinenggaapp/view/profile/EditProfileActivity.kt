@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,6 +35,8 @@ class EditProfileActivity : AppCompatActivity() {
         val emailInput = binding.emailChange
         val phoneNumberInput = binding.noHpChange
 
+        var oldEmail = ""
+
 
 
         userViewModel.currentUserProfile.observe(this) {
@@ -41,6 +44,7 @@ class EditProfileActivity : AppCompatActivity() {
                 fullNameInput.setText(it.name)
                 nisInput.setText(it.nis)
                 emailInput.setText(it.email)
+                oldEmail = it.email
                 phoneNumberInput.setText(it.no_hp)
             }
         }
@@ -69,14 +73,16 @@ class EditProfileActivity : AppCompatActivity() {
 
 
             if (fullName.isNotEmpty() && nis.isNotEmpty() && email.isNotEmpty() && phoneNumber.isNotEmpty()){
+
                 lifecycleScope.launch {
-                    userViewModel.editProfile(fullName, nis, email, phoneNumber)
                     userViewModel.checkEmailAlreadyRegistered(email)
+                    userViewModel.editProfile(fullName, nis, email, phoneNumber)
                 }
-                userViewModel.checkEmailRegistered.observe(this) {
-                    when (it) {
+
+                userViewModel.checkEmailRegistered.observe(this) {check ->
+                    when (check) {
                         "OK" -> {
-                            userViewModel.updateProfileStatus.observe(this){
+                            userViewModel.updateProfileStatus.observe(this){ it ->
                                 if (it == "OK"){
                                     Toast.makeText(this, "Berhasil Update Profile", Toast.LENGTH_SHORT).show()
                                     startActivity(Intent(this, MainActivity::class.java))
@@ -84,15 +90,20 @@ class EditProfileActivity : AppCompatActivity() {
                             }
                         }
                         "ALREADY REGISTERED" -> {
-                            Toast.makeText(this, "Email sudah digunakan!!", Toast.LENGTH_SHORT).show()
-
+                            if (email == oldEmail) {
+                                userViewModel.updateProfileStatus.observe(this) {
+                                    if (it == "OK"){
+                                        Toast.makeText(this, "Berhasil Update Profile", Toast.LENGTH_SHORT).show()
+                                        Log.d("berhasil", "OK")
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(this, "Email sudah digunakan!!", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
-
                 }
-
-
-                
             } else {
                 Toast.makeText(this, "Harap isi dengan lengkap!!", Toast.LENGTH_SHORT).show()
             }

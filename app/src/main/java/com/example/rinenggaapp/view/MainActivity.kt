@@ -13,6 +13,7 @@ import com.example.rinenggaapp.databinding.ActivityMainBinding
 import com.example.rinenggaapp.view.assignment.AssignmentIntroFragment
 import com.example.rinenggaapp.view.auth.LoginActivity
 import com.example.rinenggaapp.view.home.HomeFragment
+import com.example.rinenggaapp.view.profile.EditProfileActivity
 import com.example.rinenggaapp.view.settings.SettingsFragment
 import com.example.rinenggaapp.viewmodel.UserViewModel
 
@@ -29,10 +30,14 @@ class MainActivity : AppCompatActivity() {
         val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         userViewModel.currentUserProfile.observe(this) {
-            if (it!!.id != null) {
-                Log.d("currentUser", it.toString())
-            } else {
+            if (it!!.id.isNullOrEmpty()) {
+                Toast.makeText(this, "Silahkan Login terlebih dahulu", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, LoginActivity::class.java))
+            } else {
+                if (it.no_hp.isNullOrEmpty()) {
+                    Toast.makeText(this, "Silahkan lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, EditProfileActivity::class.java))
+                }
             }
         }
 
