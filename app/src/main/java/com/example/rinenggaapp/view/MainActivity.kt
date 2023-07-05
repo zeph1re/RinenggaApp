@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
+        Toast.makeText(this, "Silahkan logout dari fitur pengaturan", Toast.LENGTH_SHORT).show()
     }
 
 }

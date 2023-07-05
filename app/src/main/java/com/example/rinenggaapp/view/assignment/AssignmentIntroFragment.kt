@@ -60,6 +60,7 @@ class AssignmentIntroFragment : Fragment() {
         userViewModel.currentUserProfile.observe(viewLifecycleOwner){
             if (it!!.assignmentResult != null ) {
                 nextButton.isEnabled = false
+                classDropDown.isEnabled = false
                 Toast.makeText(requireContext(), "Anda sudah melakukan Pawulang!! \n tidak dapat mengulang lagi", Toast.LENGTH_SHORT).show()
             } else {
                 val alertDialog = AlertDialog.Builder(requireContext())

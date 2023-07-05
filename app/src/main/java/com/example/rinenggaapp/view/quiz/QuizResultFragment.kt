@@ -34,16 +34,12 @@ class QuizResultFragment : Fragment() {
         val quizScore = arguments?.getInt("quizScore")
         val totalQuestion = arguments?.getInt("totalQuestion")
 
-        Log.d("quizScore", quizScore.toString())
-        Log.d("totalQuestion", totalQuestion.toString())
-
         if (quizScore != null) {
             totalScore = ((quizScore.toFloat()/ totalQuestion!!.toFloat()) * 100).roundToInt()
-            Log.d("totalScoreResult", totalScore.toString())
         }
 
         val resultValue = binding.resultNumber
-        val answeredValue = binding.correctAnswer
+        val answeredValue = binding.questionAnswered
 
         resultValue.text = totalScore.toString()
         answeredValue.text = "Anda telah menyelesaikan $totalQuestion Soal Quiz"
@@ -51,7 +47,7 @@ class QuizResultFragment : Fragment() {
         Handler().postDelayed( {
             val i = Intent(requireContext(), MainActivity::class.java)
             startActivity(i)
-        }, 10000)
+        }, 5000)
 
         return root
     }

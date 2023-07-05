@@ -72,7 +72,6 @@ class QuizFragment : Fragment() {
 
         val questionViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
 
-        timerAssignment()
 
         questionViewModel.quizQuestion.observe(viewLifecycleOwner) { questionList ->
             questionList.forEach { item ->
@@ -140,19 +139,6 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun timerAssignment() {
-        val timer = object: CountDownTimer(10000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                assignmentTimer.progress = millisUntilFinished.toInt()
-
-            }
-            override fun onFinish() {
-                Toast.makeText(requireContext(), "Next Question", Toast.LENGTH_SHORT).show()
-                updateQuestion()
-            }
-        }
-        timer.start()
-    }
 
     @SuppressLint("SetTextI18n")
     private fun updateQuestion() {
