@@ -26,7 +26,7 @@
     <color name="secondary_20">#F0D9BF</color>
     <color name="secondary_10">#FFF0D5</color>
 
-    <color name="colorAccent">#FFFFFFFF</color>
+    <color name="colorAccent">#000000</color>
     <color name="neutral_100">#000000</color>
     <color name="neutral_90">#1B1D24</color>
     <color name="neutral_80">#31333A</color>

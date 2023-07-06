@@ -9,20 +9,21 @@
 
     <ImageView
         android:id="@+id/module_image"
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_margin="10dp"/>
+        android:layout_margin="8dp"/>
 
     <TextView
         android:id="@+id/module_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/beranda"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent"
+        android:textSize="19sp"
+        android:textColor="@color/white"
         android:layout_below="@+id/module_image"
         android:gravity="center_horizontal"
         android:paddingVertical="16dp"
+        android:layout_marginHorizontal="8dp"
         />
 
 </RelativeLayout>

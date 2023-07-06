@@ -31,19 +31,25 @@ class ModuleDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val moduleDetail = (activity as HomeDetailActivity).getModuleDetail()
-        Log.d("module" , moduleDetail.toString())
+        Log.d("moduleName" , moduleDetail?.name.toString())
 
         val moduleViewModel = ViewModelProvider(this)[ModuleViewModel::class.java]
 
         val moduleTitle = binding.moduleTitle
         val moduleDescription = binding.moduleDescription
         val moduleExample1 = binding.moduleExample1
+        val tuladhaText = binding.tuladhaText
+
+        if (moduleDetail!!.name == "Basa Rinengga") {
+            tuladhaText.isEnabled = false
+        }
 
         lifecycleScope.launch {
             moduleViewModel.getModuleByName(moduleDetail!!.name)
         }
 
         moduleViewModel.moduleData.observe(viewLifecycleOwner){
+
             moduleTitle.text = moduleDetail!!.name
             moduleDescription.text = moduleDetail.detailModule?.definition
             moduleExample1.text = moduleDetail.detailModule?.example!!.joinToString( separator = "\n")

@@ -1,13 +1,19 @@
 package com.example.rinenggaapp.view.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
+import android.view.MotionEvent
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.ActivityRegisterBinding
 import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.viewmodel.UserViewModel
@@ -15,9 +21,7 @@ import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var _binding: ActivityRegisterBinding
-
-    val binding get() = _binding
+    private lateinit var binding: ActivityRegisterBinding
 
     private lateinit var fullNameInput : EditText
     private lateinit var nisInput : EditText
@@ -25,9 +29,11 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var passwordInput : EditText
     private lateinit var confirmPasswordInput : EditText
 
+    private var passwordVisible = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -38,6 +44,9 @@ class RegisterActivity : AppCompatActivity() {
         emailInput = binding.emailInputRegister
         passwordInput = binding.passwordInputRegister
         confirmPasswordInput = binding.rePasswordInputRegister
+
+        passwordVisibilityToggle(passwordInput)
+        passwordVisibilityToggle(confirmPasswordInput)
 
         binding.registerButton.setOnClickListener {
 
@@ -130,5 +139,29 @@ class RegisterActivity : AppCompatActivity() {
 
 
         return true
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun passwordVisibilityToggle(editView : EditText) {
+        editView.setOnTouchListener { view, motionEvent ->
+            val right = 2
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                if (motionEvent.getRawX() >= editView.right - editView.compoundDrawables[right].bounds.width()) {
+                    val selection = editView.selectionEnd
+                    if (passwordVisible) {
+                        editView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.baseline_visibility_off_24, 0)
+                        editView.transformationMethod = PasswordTransformationMethod.getInstance()
+                        passwordVisible = false
+                    } else {
+                        editView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.baseline_visibility_24, 0)
+                        editView.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        passwordVisible = true
+                    }
+                    passwordInput.setSelection(selection)
+                    true
+                }
+            }
+            false
+        }
     }
 }

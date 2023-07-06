@@ -1,13 +1,18 @@
 package com.example.rinenggaapp.view.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
+import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.rinenggaapp.R
 import com.example.rinenggaapp.databinding.ActivityLoginBinding
 import com.example.rinenggaapp.model.UserLogin
 import com.example.rinenggaapp.view.MainActivity
@@ -22,8 +27,10 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailInput : EditText
     private lateinit var passwordInput : EditText
+    private var passwordVisible = false
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -34,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         emailInput = binding.emailInputLogin
         passwordInput = binding.passwordInputLogin
 
+
         registerNav.setOnClickListener {
             val i = Intent(this, RegisterActivity::class.java)
             startActivity(i)
@@ -43,8 +51,27 @@ class LoginActivity : AppCompatActivity() {
            if (checkFields()){
                processLogin()
            }
+        }
 
-
+        passwordInput.setOnTouchListener { view, motionEvent ->
+            val right = 2
+            if (motionEvent.action == MotionEvent.ACTION_UP) {
+                if (motionEvent.getRawX() >= passwordInput.right - passwordInput.compoundDrawables[right].bounds.width()) {
+                    val selection = passwordInput.selectionEnd
+                    if (passwordVisible) {
+                        passwordInput.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.baseline_visibility_off_24, 0)
+                        passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
+                        passwordVisible = false
+                    } else {
+                        passwordInput.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.baseline_visibility_24, 0)
+                        passwordInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        passwordVisible = true
+                    }
+                    passwordInput.setSelection(selection)
+                    true
+                }
+            }
+            false
         }
     }
 

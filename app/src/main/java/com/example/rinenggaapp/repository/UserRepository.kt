@@ -184,37 +184,6 @@ class UserRepository {
 
     }
 
-
-    suspend fun getUserProfilePhotoUrl(fileUri: Uri?, isUploadingImage: Boolean, namaFile: String?){
-        if(isUploadingImage){
-            val storageRef = firebaseCloudStorage.reference
-            val newPhotoRef = storageRef.child("foto_profil_user/$namaFile")
-            val uploadTask = newPhotoRef.putFile(fileUri!!)
-            uploadTask.continueWithTask { getDownloadUrlTask ->
-                if(!getDownloadUrlTask.isSuccessful){
-                    getDownloadUrlTask.exception?.let {
-                        throw it
-                    }
-                }
-                newPhotoRef.downloadUrl
-            }.addOnCompleteListener {  getDownloadTaskStatus ->
-                if(getDownloadTaskStatus.isSuccessful){
-                    currentUserFotoProfilUrl.postValue(getDownloadTaskStatus.result.toString())
-                }else{
-                    currentUserFotoProfilUrl.postValue(null)
-                }
-            }
-        }else{
-            firestore.collection("user")
-                .document(currentUser.value!!.uid)
-                .get()
-                .addOnSuccessListener { snapshot ->
-                    val userProfile = snapshot.toObject(User::class.java)
-                    currentUserFotoProfilUrl.postValue(userProfile!!.imageUrl)
-                }
-        }
-    }
-
     suspend fun putAssignmentData(assignmentScore : Int, classInfo : String) {
         val user = firebaseAuth.currentUser
         if (user != null) {

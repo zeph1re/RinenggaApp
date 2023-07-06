@@ -13,8 +13,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="nis">NIS</string>
-    <string name="belum_punya_akun">Belum punya akun?    </string>
-    <string name="sudah_punya_akun">Sudah punya akun?    </string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="start">Mulai</string>
     <string name="cancel">Batal</string>
@@ -60,4 +60,5 @@
     <string name="meningkatkan_kemampuan_dan_ketrampilan_mulai_menjelajah_sebanyak_yang_diinginkan">Meningkatkan kemampuan dan ketrampilan, mulai menjelajah sebanyak yang diinginkan!</string>
     <string name="finish">Selesai</string>
     <string name="old_password">Password Lama</string>
+    <string name="tuladha">Tuladha</string>
 </resources>

@@ -52,7 +52,6 @@ class ModuleRepository {
             if(!value!!.isEmpty){
                 value.forEach { item ->
                     val module = item.toObject(Module::class.java)
-                    Log.d("module", module.toString())
                     moduleDataResult += module
                 }
             }

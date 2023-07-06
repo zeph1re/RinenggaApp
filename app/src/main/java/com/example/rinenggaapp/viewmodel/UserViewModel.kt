@@ -31,8 +31,5 @@ class UserViewModel : ViewModel() {
     suspend fun changePassword(oldPassword : String, newPassword: String)  = userRepository.changePassword(oldPassword, newPassword)
     suspend fun editProfile(fullName : String, nis : String, email : String, phoneNumber : String) = userRepository.editProfile(fullName,nis,email,phoneNumber)
     suspend fun putAssignmentData(assignmentScore : Int, classInfo : String) = userRepository.putAssignmentData(assignmentScore, classInfo)
-    suspend fun updateProfilePhoto(uri : Uri, file : File)
-        = userRepository.getUserProfilePhotoUrl(
-            uri, false, file.toString()
-    )
+
 }
