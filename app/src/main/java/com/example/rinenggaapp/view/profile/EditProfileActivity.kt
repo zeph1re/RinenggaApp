@@ -19,7 +19,6 @@ class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
 
-    private lateinit var uri : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
@@ -27,8 +26,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
-        val profilePhotoUpdate = binding.imageProfileChange
-        val profilePhoto = binding.imageProfile
         val saveButton = binding.changeProfileButton
         val fullNameInput = binding.fullNameInputEdit
         val nisInput = binding.nisInputEdit
@@ -36,8 +33,6 @@ class EditProfileActivity : AppCompatActivity() {
         val phoneNumberInput = binding.noHpChange
 
         var oldEmail = ""
-
-
 
         userViewModel.currentUserProfile.observe(this) {
             if (it != null) {
@@ -48,22 +43,6 @@ class EditProfileActivity : AppCompatActivity() {
                 phoneNumberInput.setText(it.no_hp)
             }
         }
-
-        profilePhotoUpdate.setOnClickListener {
-            val galleryImage = registerForActivityResult(
-                ActivityResultContracts.GetContent(),
-                ActivityResultCallback {
-                    profilePhoto.setImageURI(it)
-                    uri = it!!
-
-                }
-            )
-            galleryImage.launch("image/*")
-
-
-        }
-
-
 
         saveButton.setOnClickListener {
             val fullName = fullNameInput.text.toString()
