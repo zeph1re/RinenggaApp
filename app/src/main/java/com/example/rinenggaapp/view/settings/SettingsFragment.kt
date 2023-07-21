@@ -43,7 +43,7 @@ class SettingsFragment : Fragment() {
 
         val name = binding.profileName
         val nis = binding.profileNis
-        val profilePhoto = binding.profileImage
+
 
         sharedPreferences = requireActivity().getSharedPreferences("PREFS", Context.MODE_PRIVATE)
 
@@ -52,7 +52,7 @@ class SettingsFragment : Fragment() {
             if (it != null) {
                 name.text = it.name
                 nis.text = it.nis
-                Glide.with(requireContext()).load(it.imageUrl).into(profilePhoto)
+
             }
         }
 

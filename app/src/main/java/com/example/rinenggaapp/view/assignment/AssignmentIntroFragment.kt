@@ -42,7 +42,7 @@ class AssignmentIntroFragment : Fragment() {
         val classDropDown = binding.inputClassDropdown
         val nextButton = binding.nextButton
 
-        val classes = arrayOf("X1", "X3","X4","X5","X6","X7","X8","X9","X10" )
+        val classes = arrayOf("X1","X2","X3","X4","X5","X6","X7","X8","X9","X10" )
         var classInfo = ""
 
         val classAdapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, classes)

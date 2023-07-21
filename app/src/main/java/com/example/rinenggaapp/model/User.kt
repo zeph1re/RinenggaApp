@@ -11,7 +11,6 @@ data class User(
     val email: String = "",
     val nis: String? = "",
     val classInfo : String? = "",
-    val imageUrl: String? = "",
     val no_hp: String? = "",
     val assignmentResult: Int? = 0
 ): Parcelable

@@ -81,6 +81,7 @@ class AssignmentFragment : Fragment() {
             Log.d("quizQuestion", questionList.toString())
 
             updateQuestion()
+//            timerAssignment()
 
             submitButton.setOnClickListener {
                 if (!isAnswerChecked) {
@@ -124,7 +125,7 @@ class AssignmentFragment : Fragment() {
                 }
             }
 
-            timerAssignment()
+
 
             Log.d("score", totalScore.toString())
         }
@@ -162,7 +163,7 @@ class AssignmentFragment : Fragment() {
             answerTv.typeface = Typeface.DEFAULT
             answerTv.textSize = 14.0F
             answerTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80))
-            answerTv.setBackgroundColor(Color.LTGRAY)
+            answerTv.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.neutral_20))
         }
     }
 
@@ -171,7 +172,7 @@ class AssignmentFragment : Fragment() {
         selectedAnswerIndex = index
         option.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_40))
         option.setTypeface(option.typeface, Typeface.BOLD)
-        option.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+        option.setBackgroundColor(Color.LTGRAY)
     }
 
     private fun correctAnswerView(view: Button) {

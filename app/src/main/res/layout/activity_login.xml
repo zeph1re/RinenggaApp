@@ -91,6 +91,6 @@
         android:background="@drawable/rounded_button"
         android:layout_below="@id/password_input_login"
         android:layout_marginVertical="32dp"
-        android:layout_marginHorizontal="32dp"/>
+        android:layout_marginHorizontal="64dp"/>
 
 </RelativeLayout>

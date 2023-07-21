@@ -158,7 +158,7 @@ class QuizFragment : Fragment() {
             answerTv.typeface = Typeface.DEFAULT
             answerTv.textSize = 17.0F
             answerTv.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary_80))
-            answerTv.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.colorAccent))
+            answerTv.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.neutral_20))
         }
     }
 

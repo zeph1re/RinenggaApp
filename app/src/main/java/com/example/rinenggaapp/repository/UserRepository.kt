@@ -92,7 +92,6 @@ class UserRepository {
                                     name = user.displayName!!,
                                     email = user.email!!,
                                     nis = userRegister.nis,
-                                    imageUrl = null,
                                     no_hp = null,
                                     assignmentResult = null
                                 )
