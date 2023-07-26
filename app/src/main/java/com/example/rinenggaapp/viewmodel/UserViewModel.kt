@@ -1,11 +1,9 @@
 package com.example.rinenggaapp.viewmodel
 
-import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.example.rinenggaapp.model.UserLogin
 import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.repository.UserRepository
-import java.io.File
 import javax.inject.Singleton
 
 class UserViewModel : ViewModel() {
