@@ -3,7 +3,6 @@ package com.example.rinenggaapp.view.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +48,6 @@ class HomeFragment : Fragment() {
 
         authViewModel.currentUserProfile.observe(viewLifecycleOwner) {
             welcomeText.text = "Sugeng Rawuh!!\n${it!!.name}"
-            Log.d("fullName", it.toString())
         }
 
 
@@ -59,7 +57,6 @@ class HomeFragment : Fragment() {
             val bundle = Bundle()
             bundle.putParcelable("MODULE", module)
             sendDetail.putExtras(bundle)
-            Log.d("Clicked", module.toString())
             startActivity(sendDetail)
         }
 

@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,7 +77,6 @@ class AssignmentFragment : Fragment() {
             listQuestion.forEach { item ->
                 questionList.add(item)
             }
-            Log.d("quizQuestion", questionList.toString())
 
             updateQuestion()
 //            timerAssignment()
@@ -93,7 +91,6 @@ class AssignmentFragment : Fragment() {
                         if ( selectedAnswerIndex == currentQuestion.correctAnswerIndex ) {
                             totalScore++
                         }
-
                         isAnswerChecked = true
                         submitButton.text = if (currentQuestionIndex == questionList.size-1) "FINISH" else "GO TO NEXT QUESTION"
                         selectedAnswerIndex = -1
@@ -108,7 +105,6 @@ class AssignmentFragment : Fragment() {
                         bundle.putInt("totalQuestion", questionList.size)
                         Navigation.findNavController(requireView()).navigate(R.id.action_assignmentFragment_to_assignmentResultFragment, bundle)
                     }
-
                     isAnswerChecked = false
                 }
             }
@@ -124,10 +120,6 @@ class AssignmentFragment : Fragment() {
                     }
                 }
             }
-
-
-
-            Log.d("score", totalScore.toString())
         }
     }
 

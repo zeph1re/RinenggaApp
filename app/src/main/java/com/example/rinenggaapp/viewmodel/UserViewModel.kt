@@ -6,6 +6,7 @@ import com.example.rinenggaapp.model.UserLogin
 import com.example.rinenggaapp.model.UserRegister
 import com.example.rinenggaapp.repository.UserRepository
 import java.io.File
+import javax.inject.Singleton
 
 class UserViewModel : ViewModel() {
 
@@ -29,6 +30,7 @@ class UserViewModel : ViewModel() {
     suspend fun loginAccount (userLogin : UserLogin) = userRepository.loginUser(userLogin)
     suspend fun logout() = userRepository.logout()
     suspend fun changePassword(oldPassword : String, newPassword: String)  = userRepository.changePassword(oldPassword, newPassword)
+    @Singleton
     suspend fun editProfile(fullName : String, nis : String, email : String, phoneNumber : String) = userRepository.editProfile(fullName,nis,email,phoneNumber)
     suspend fun putAssignmentData(assignmentScore : Int, classInfo : String) = userRepository.putAssignmentData(assignmentScore, classInfo)
 

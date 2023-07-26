@@ -2,7 +2,6 @@ package com.example.rinenggaapp.view.quiz
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +31,6 @@ class QuizDetailFragment : Fragment() {
 
         val moduleName = arguments?.getString("moduleName")
         val moduleImage = arguments?.getString("moduleImage")
-        Log.d("moduleName", moduleName.toString())
 
         val quizViewModel = ViewModelProvider(this)[QuestionViewModel::class.java]
 
@@ -47,7 +45,6 @@ class QuizDetailFragment : Fragment() {
         }
 
         quizViewModel.quizQuestion.observe(viewLifecycleOwner){
-            Log.d("quiz question" , it.toString())
             title.text = moduleName
             Glide.with(requireContext()).load(moduleImage).into(imageModule)
             Handler().postDelayed( {

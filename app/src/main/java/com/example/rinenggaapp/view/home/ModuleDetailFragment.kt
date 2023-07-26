@@ -1,7 +1,6 @@
 package com.example.rinenggaapp.view.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,6 @@ class ModuleDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val moduleDetail = (activity as HomeDetailActivity).getModuleDetail()
-        Log.d("moduleName" , moduleDetail?.name.toString())
 
         val moduleViewModel = ViewModelProvider(this)[ModuleViewModel::class.java]
 

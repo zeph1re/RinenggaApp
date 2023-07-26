@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +75,6 @@ class QuizFragment : Fragment() {
             questionList.forEach { item ->
                 this.questionList.add(item)
             }
-            Log.d("quizQuestion", this.questionList.toString())
 
             updateQuestion()
 
@@ -91,12 +88,6 @@ class QuizFragment : Fragment() {
                         if ( selectedAnswerIndex == currentQuestion.correctAnswerIndex ) {
                             correctAnswerView(answersTv[selectedAnswerIndex])
                             totalScore++
-                            Log.d("correctAnswer",
-                                currentQuestion.correctAnswerIndex.toString()
-                            )
-                            Log.d("totalScore",
-                                totalScore.toString()
-                            )
                         } else {
                             incorrectAnswerView(answersTv[selectedAnswerIndex])
                             correctAnswerView(answersTv[currentQuestion.correctAnswerIndex])
@@ -132,10 +123,6 @@ class QuizFragment : Fragment() {
                     }
                 }
             }
-
-
-
-            Log.d("score", totalScore.toString())
         }
     }
 

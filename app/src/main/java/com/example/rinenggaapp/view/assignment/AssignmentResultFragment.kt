@@ -3,7 +3,6 @@ package com.example.rinenggaapp.view.assignment
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,11 +39,9 @@ class AssignmentResultFragment : Fragment() {
         val questionAnswered = binding.questionAnswered
 
         val classInfo = (activity as AssignmentActivity).getClassName()
-        Log.d("classInfo Result", classInfo)
 
         if (assignmentScore != null) {
             totalScore = ((assignmentScore.toFloat()/ totalQuestion!!.toFloat()) * 100).roundToInt()
-            Log.d("totalScoreResult", totalScore.toString())
         }
 
         textResult.text = totalScore.toString()

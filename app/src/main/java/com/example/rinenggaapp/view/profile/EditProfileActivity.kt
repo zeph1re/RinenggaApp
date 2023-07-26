@@ -73,7 +73,6 @@ class EditProfileActivity : AppCompatActivity() {
                                 userViewModel.updateProfileStatus.observe(this) {
                                     if (it == "OK"){
                                         Toast.makeText(this, "Berhasil Update Profile", Toast.LENGTH_SHORT).show()
-                                        Log.d("berhasil", "OK")
                                         startActivity(Intent(this, MainActivity::class.java))
                                     }
                                 }

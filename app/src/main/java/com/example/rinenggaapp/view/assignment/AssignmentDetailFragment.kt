@@ -1,7 +1,6 @@
 package com.example.rinenggaapp.view.assignment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +28,6 @@ class AssignmentDetailFragment : Fragment() {
         val root : View = binding.root
 
         val className = (activity as AssignmentActivity).getClassName()
-        Log.d("className" , className)
 
         val totalQuestion = binding.totalQuestionDetail
         val startAssignmentButton = binding.startAssignmentButton
@@ -41,7 +39,6 @@ class AssignmentDetailFragment : Fragment() {
         }
 
         questionViewModel.allQuestion.observe(viewLifecycleOwner){
-            Log.d("assignment question" , it.toString())
             totalQuestion.text = it.size.toString()
         }
 
